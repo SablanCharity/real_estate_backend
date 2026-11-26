@@ -4,6 +4,7 @@ import {
   Patch,
   Delete,
   Body,
+  Req,
   Param,
   Query,
   UseGuards,
@@ -33,15 +34,15 @@ export class UsersController {
   ) {
     return this.usersService.findAll(
       role,
-      page ? parseInt(page, 10) : 1,
-      limit ? parseInt(limit, 10) : 10,
+      page ? Math.max(1, parseInt(page, 10) || 1) : 1,
+      limit ? Math.min(100, Math.max(1, parseInt(limit, 10) || 10)) : 10,
     );
   }
 
   // Endpoint 4: GET /api/v1/users/:id (Authenticated)
   @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.usersService.findOne(id);
+  async findOne(@Param('id', ParseIntPipe) id: number, @Req() req: any) {
+    return this.usersService.findOne(id, req.user);
   }
 
   // Endpoint 5: PATCH /api/v1/users/:id (Authenticated)
@@ -49,8 +50,9 @@ export class UsersController {
   async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updateUserDto: UpdateUserDto,
+    @Req() req: any,
   ) {
-    return this.usersService.update(id, updateUserDto);
+    return this.usersService.update(id, updateUserDto, req.user);
   }
 
   // Endpoint 6: DELETE /api/v1/users/:id (Admin only)

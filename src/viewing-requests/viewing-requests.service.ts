@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, ConflictException } from '@nestjs/common';
+import { Injectable, NotFoundException, ConflictException, ForbiddenException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { ViewingRequest, RequestStatus } from '../entities/viewing-request.entity';
@@ -6,7 +6,7 @@ import { ViewingLog, LogStatus } from '../entities/viewing-log.entity';
 import { Property } from '../entities/property.entity';
 import { CreateViewingRequestDto } from './dto/create-viewing-request.dto';
 import { UpdateViewingRequestDto } from './dto/update-viewing-request.dto';
-import { User } from '../entities/user.entity';
+import { User, UserRole } from '../entities/user.entity';
 
 @Injectable()
 export class ViewingRequestsService {
@@ -61,7 +61,7 @@ export class ViewingRequestsService {
     return savedRequest;
   }
 
-  async findAll(status?: RequestStatus) {
+  async findAll(status: RequestStatus | undefined, user: User) {
     const query = this.requestRepository.createQueryBuilder('request')
       .leftJoinAndSelect('request.customer', 'customer')
       .leftJoinAndSelect('request.property', 'property');
@@ -70,10 +70,16 @@ export class ViewingRequestsService {
       query.andWhere('request.status = :status', { status });
     }
 
+    if (user.role === UserRole.CUSTOMER) {
+      query.andWhere('request.customerId = :userId', { userId: user.userId });
+    } else if (user.role === UserRole.AGENT) {
+      query.andWhere('property.agentId = :userId', { userId: user.userId });
+    }
+
     return query.getMany();
   }
 
-  async findOne(id: number) {
+  async findOne(id: number, user?: User) {
     const request = await this.requestRepository.findOne({
       where: { requestId: id },
       relations: { customer: true, property: true, logs: true },
@@ -83,11 +89,23 @@ export class ViewingRequestsService {
       throw new NotFoundException(`Viewing Request #${id} not found.`);
     }
 
+    if (user && !this.canAccessRequest(request, user)) {
+      throw new ForbiddenException('You cannot access this viewing request.');
+    }
+
     return request;
   }
 
+  private canAccessRequest(request: ViewingRequest, user: User) {
+    return (
+      user.role === UserRole.ADMIN ||
+      (user.role === UserRole.CUSTOMER && request.customerId === user.userId) ||
+      (user.role === UserRole.AGENT && request.property?.agentId === user.userId)
+    );
+  }
+
   async updateStatus(id: number, dto: UpdateViewingRequestDto, user: User) {
-    const request = await this.findOne(id);
+    const request = await this.findOne(id, user);
 
     request.status = dto.status;
     const updatedRequest = await this.requestRepository.save(request);
@@ -103,14 +121,14 @@ export class ViewingRequestsService {
     return updatedRequest;
   }
 
-  async remove(id: number) {
-    const request = await this.findOne(id);
+  async remove(id: number, user: User) {
+    const request = await this.findOne(id, user);
     await this.requestRepository.remove(request);
     return { message: `Viewing request #${id} cancelled/removed.` };
   }
 
-  async getLogs(id: number) {
-    await this.findOne(id);
+  async getLogs(id: number, user: User) {
+    await this.findOne(id, user);
     return this.logRepository.find({
       where: { requestId: id },
       relations: { updatedByUser: true },

@@ -27,7 +27,7 @@ import { ViewingRequestsModule } from './viewing-requests/viewing-requests.modul
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_DATABASE'),
         entities: [User, Property, PropertyImage, ViewingRequest, ViewingLog],
-        synchronize: true,
+        synchronize: configService.get<string>('NODE_ENV') !== 'production',
       }),
     }),
     AuthModule,

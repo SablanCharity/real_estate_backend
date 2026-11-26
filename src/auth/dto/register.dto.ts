@@ -1,8 +1,8 @@
 import {
   IsEmail,
+  IsIn,
   IsNotEmpty,
   IsOptional,
-  IsEnum,
   IsString,
   Matches,
 } from 'class-validator';
@@ -24,7 +24,7 @@ export class RegisterDto {
   password: string;
 
   @IsOptional()
-  @IsEnum(UserRole, { message: 'Role must be Admin, Agent, or Customer' })
+  @IsIn([UserRole.CUSTOMER, UserRole.AGENT])
   role?: UserRole;
 
   @IsOptional()

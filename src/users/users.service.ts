@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, ForbiddenException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User, UserRole } from '../entities/user.entity';
@@ -31,7 +31,7 @@ export class UsersService {
     return query.getMany();
   }
 
-  async findOne(id: number) {
+  async findOne(id: number, currentUser?: User) {
     const user = await this.userRepository.findOne({
       where: { userId: id },
       select: {
@@ -48,16 +48,23 @@ export class UsersService {
       throw new NotFoundException(`User with ID ${id} not found.`);
     }
 
+    if (currentUser && currentUser.role !== UserRole.ADMIN && currentUser.userId !== id) {
+      throw new ForbiddenException('You can only view your own profile.');
+    }
+
     return user;
   }
 
-  async update(id: number, updateUserDto: UpdateUserDto) {
-    const user = await this.userRepository.findOne({ where: { userId: id } });
-
-    if (!user) {
-      throw new NotFoundException(`User with ID ${id} not found.`);
+  async update(id: number, updateUserDto: UpdateUserDto, currentUser: any) {
+    if (currentUser.role !== UserRole.ADMIN && currentUser.userId !== id) {
+      throw new ForbiddenException('You can only update your own profile.');
     }
 
+    if (currentUser.role !== UserRole.ADMIN && updateUserDto.role) {
+      throw new ForbiddenException('Only an Admin can change user roles.');
+    }
+
+    const user = await this.findOne(id);
     Object.assign(user, updateUserDto);
     const saved = await this.userRepository.save(user);
 

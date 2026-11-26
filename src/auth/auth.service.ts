@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcrypt';
-import { User } from '../entities/user.entity';
+import { User, UserRole } from '../entities/user.entity';
 import { RegisterDto } from './dto/register.dto';
 import { LoginDto } from './dto/login.dto';
 
@@ -32,7 +32,7 @@ export class AuthService {
       fullName: registerDto.fullName,
       email: registerDto.email,
       passwordHash: passwordHash,
-      role: registerDto.role,
+      role: registerDto.role ?? UserRole.CUSTOMER,
       phone: registerDto.phone,
     });
 
@@ -46,6 +46,7 @@ export class AuthService {
   async login(loginDto: LoginDto) {
     const user = await this.userRepository.findOne({
       where: { email: loginDto.email },
+      select: { userId: true, email: true, passwordHash: true, fullName: true, role: true },
     });
 
     if (!user) {

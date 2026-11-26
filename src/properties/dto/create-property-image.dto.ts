@@ -1,8 +1,8 @@
-import { IsOptional, IsString } from 'class-validator';
+import { IsOptional, IsString, IsUrl } from 'class-validator';
 
 export class CreatePropertyImageDto {
   @IsOptional()
-  @IsString()
+  @IsUrl({ protocols: ['http', 'https'], require_protocol: true })
   imageUrl?: string;
 
   @IsOptional()

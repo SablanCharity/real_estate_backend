@@ -37,14 +37,14 @@ export class ViewingRequestsController {
   // GET /api/v1/viewing-requests (Agent, Admin)
   @Roles(UserRole.AGENT, UserRole.ADMIN)
   @Get()
-  async findAll(@Query('status') status?: RequestStatus) {
-    return this.viewingRequestsService.findAll(status);
+  async findAll(@Query('status') status: RequestStatus | undefined, @Req() req: any) {
+    return this.viewingRequestsService.findAll(status, req.user);
   }
 
   // GET /api/v1/viewing-requests/:id (Authenticated)
   @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id: number) {
-    return this.viewingRequestsService.findOne(id);
+  async findOne(@Param('id', ParseIntPipe) id: number, @Req() req: any) {
+    return this.viewingRequestsService.findOne(id, req.user);
   }
 
   // PATCH /api/v1/viewing-requests/:id (Agent, Admin)
@@ -62,14 +62,14 @@ export class ViewingRequestsController {
   @Roles(UserRole.CUSTOMER, UserRole.ADMIN)
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
-  async remove(@Param('id', ParseIntPipe) id: number) {
-    return this.viewingRequestsService.remove(id);
+  async remove(@Param('id', ParseIntPipe) id: number, @Req() req: any) {
+    return this.viewingRequestsService.remove(id, req.user);
   }
 
   // GET /api/v1/viewing-requests/:id/logs (Agent, Admin)
   @Roles(UserRole.AGENT, UserRole.ADMIN)
   @Get(':id/logs')
-  async getLogs(@Param('id', ParseIntPipe) id: number) {
-    return this.viewingRequestsService.getLogs(id);
+  async getLogs(@Param('id', ParseIntPipe) id: number, @Req() req: any) {
+    return this.viewingRequestsService.getLogs(id, req.user);
   }
 }

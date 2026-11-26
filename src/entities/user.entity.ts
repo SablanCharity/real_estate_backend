@@ -26,7 +26,7 @@ export class User {
   @Column({ name: 'Email', length: 150, unique: true })
   email: string;
 
-  @Column({ name: 'PasswordHash', length: 255 })
+  @Column({ name: 'PasswordHash', length: 255, select: false })
   passwordHash: string;
 
   @Column({

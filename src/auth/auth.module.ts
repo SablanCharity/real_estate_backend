@@ -8,6 +8,7 @@ import { AuthService } from './auth.service';
 import { AuthController } from './auth.controller';
 import { User } from '../entities/user.entity';
 import { JwtStrategy } from './strategies/jwt.strategy';
+import { getJwtSecret } from './jwt-secret';
 
 @Module({
   imports: [
@@ -17,7 +18,7 @@ import { JwtStrategy } from './strategies/jwt.strategy';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        secret: configService.get<string>('JWT_SECRET') || 'superSecretKeyForRealEstateApp2026!',
+        secret: getJwtSecret(configService),
         signOptions: {
           expiresIn: '1d', // Hardcoded safe string literal matching JwtModuleOptions
         },

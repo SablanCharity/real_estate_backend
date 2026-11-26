@@ -5,6 +5,7 @@ import { ConfigService } from '@nestjs/config';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from '../../entities/user.entity';
+import { getJwtSecret } from '../jwt-secret';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
@@ -13,7 +14,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     @InjectRepository(User)
     private userRepository: Repository<User>,
   ) {
-    const secret = configService.get<string>('JWT_SECRET') || 'superSecretKeyForRealEstateApp2026!';
+    const secret = getJwtSecret(configService);
 
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),

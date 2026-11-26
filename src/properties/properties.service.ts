@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException, ForbiddenException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Property, PropertyStatus } from '../entities/property.entity';
@@ -6,7 +6,7 @@ import { PropertyImage } from '../entities/property-image.entity';
 import { CreatePropertyDto } from './dto/create-property.dto';
 import { UpdatePropertyDto } from './dto/update-property.dto';
 import { CreatePropertyImageDto } from './dto/create-property-image.dto';
-import { User } from '../entities/user.entity';
+import { User, UserRole } from '../entities/user.entity';
 
 @Injectable()
 export class PropertiesService {
@@ -48,7 +48,13 @@ export class PropertiesService {
   async findAll(status?: PropertyStatus, location?: string) {
     const query = this.propertyRepository.createQueryBuilder('property')
       .leftJoinAndSelect('property.agent', 'agent')
-      .leftJoinAndSelect('property.images', 'images');
+      .leftJoinAndSelect('property.images', 'images')
+      .select([
+        'property.propertyId', 'property.agentId', 'property.title',
+        'property.description', 'property.price', 'property.location',
+        'property.status', 'property.createdAt', 'agent.userId', 'agent.fullName',
+        'images.imageId', 'images.propertyId', 'images.imageUrl', 'images.uploadedAt',
+      ]);
 
     if (status) {
       query.andWhere('property.status = :status', { status });
@@ -62,10 +68,17 @@ export class PropertiesService {
   }
 
   async findOne(id: number) {
-    const property = await this.propertyRepository.findOne({
-      where: { propertyId: id },
-      relations: { agent: true, images: true },
-    });
+    const property = await this.propertyRepository.createQueryBuilder('property')
+      .leftJoinAndSelect('property.agent', 'agent')
+      .leftJoinAndSelect('property.images', 'images')
+      .select([
+        'property.propertyId', 'property.agentId', 'property.title',
+        'property.description', 'property.price', 'property.location',
+        'property.status', 'property.createdAt', 'agent.userId', 'agent.fullName',
+        'images.imageId', 'images.propertyId', 'images.imageUrl', 'images.uploadedAt',
+      ])
+      .where('property.propertyId = :id', { id })
+      .getOne();
 
     if (!property) {
       throw new NotFoundException(`Property with ID ${id} not found.`);
@@ -74,14 +87,22 @@ export class PropertiesService {
     return property;
   }
 
-  async update(id: number, updatePropertyDto: UpdatePropertyDto) {
+  private assertCanManage(property: Property, user: User) {
+    if (user.role !== UserRole.ADMIN && property.agentId !== user.userId) {
+      throw new ForbiddenException('You can only manage your own properties.');
+    }
+  }
+
+  async update(id: number, updatePropertyDto: UpdatePropertyDto, user: User) {
     const property = await this.findOne(id);
+    this.assertCanManage(property, user);
     Object.assign(property, updatePropertyDto);
     return this.propertyRepository.save(property);
   }
 
-  async remove(id: number) {
+  async remove(id: number, user: User) {
     const property = await this.findOne(id);
+    this.assertCanManage(property, user);
     await this.propertyRepository.remove(property);
     return { message: `Property #${id} successfully deleted.` };
   }
@@ -90,9 +111,11 @@ export class PropertiesService {
   async addImage(
     propertyId: number,
     dto: CreatePropertyImageDto,
+    user: User,
     file?: Express.Multer.File,
   ) {
     const property = await this.findOne(propertyId);
+    this.assertCanManage(property, user);
 
     const resolvedImageUrl = file
       ? `http://localhost:3000/uploads/properties/${file.filename}`
@@ -116,7 +139,9 @@ export class PropertiesService {
     return this.imageRepository.find({ where: { propertyId } });
   }
 
-  async removeImage(propertyId: number, imageId: number) {
+  async removeImage(propertyId: number, imageId: number, user: User) {
+    const property = await this.findOne(propertyId);
+    this.assertCanManage(property, user);
     const image = await this.imageRepository.findOne({
       where: { imageId, propertyId },
     });

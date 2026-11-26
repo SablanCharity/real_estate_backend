@@ -19,7 +19,7 @@ import {
 import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer-options.interface';
-import { extname } from 'path';
+import { join } from 'path';
 import * as fs from 'fs';
 import { PropertiesService } from './properties.service';
 import { CreatePropertyDto } from './dto/create-property.dto';
@@ -34,17 +34,22 @@ import { UserRole } from '../entities/user.entity';
 const propertyImageUploadOptions: MulterOptions = {
   storage: diskStorage({
     destination: (req, file, cb) => {
-      const uploadPath = './uploads/properties';
+      const uploadPath = join(process.cwd(), 'uploads', 'properties');
       fs.mkdirSync(uploadPath, { recursive: true });
       cb(null, uploadPath);
     },
     filename: (req, file, cb) => {
       const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
-      cb(null, `property-${uniqueSuffix}${extname(file.originalname)}`);
+      const extensionByMimeType: Record<string, string> = {
+        'image/jpeg': '.jpg',
+        'image/png': '.png',
+        'image/webp': '.webp',
+      };
+      cb(null, `property-${uniqueSuffix}${extensionByMimeType[file.mimetype] ?? '.img'}`);
     },
   }),
   fileFilter: (req, file, cb) => {
-    if (!file.mimetype.match(/\/(jpg|jpeg|png|webp)$/)) {
+    if (!['image/jpeg', 'image/png', 'image/webp'].includes(file.mimetype)) {
       return cb(
         new BadRequestException('Only JPG, JPEG, PNG, and WEBP images are allowed.'),
         false,
@@ -94,8 +99,9 @@ export class PropertiesController {
   async update(
     @Param('id', ParseIntPipe) id: number,
     @Body() updatePropertyDto: UpdatePropertyDto,
+    @Req() req: any,
   ) {
-    return this.propertiesService.update(id, updatePropertyDto);
+    return this.propertiesService.update(id, updatePropertyDto, req.user);
   }
 
   // DELETE /api/v1/properties/:id (Agent, Admin)
@@ -103,8 +109,8 @@ export class PropertiesController {
   @Roles(UserRole.AGENT, UserRole.ADMIN)
   @HttpCode(HttpStatus.NO_CONTENT)
   @Delete(':id')
-  async remove(@Param('id', ParseIntPipe) id: number) {
-    return this.propertiesService.remove(id);
+  async remove(@Param('id', ParseIntPipe) id: number, @Req() req: any) {
+    return this.propertiesService.remove(id, req.user);
   }
 
   // GET /api/v1/properties/:id/images (Public)
@@ -121,9 +127,10 @@ export class PropertiesController {
   async addImage(
     @Param('id', ParseIntPipe) id: number,
     @Body() dto: CreatePropertyImageDto,
+    @Req() req: any,
     @UploadedFile() file?: Express.Multer.File,
   ) {
-    return this.propertiesService.addImage(id, dto, file);
+    return this.propertiesService.addImage(id, dto, req.user, file);
   }
 
   // DELETE /api/v1/properties/:id/images/:imageId (Agent, Admin)
@@ -134,7 +141,8 @@ export class PropertiesController {
   async removeImage(
     @Param('id', ParseIntPipe) id: number,
     @Param('imageId', ParseIntPipe) imageId: number,
+    @Req() req: any,
   ) {
-    return this.propertiesService.removeImage(id, imageId);
+    return this.propertiesService.removeImage(id, imageId, req.user);
   }
 }

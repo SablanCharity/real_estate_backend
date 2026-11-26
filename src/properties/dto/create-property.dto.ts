@@ -1,4 +1,4 @@
-import { IsNotEmpty, IsString, IsNumber, IsOptional, IsEnum, Min } from 'class-validator';
+import { IsNotEmpty, IsString, IsNumber, IsOptional, IsEnum, IsUrl, Min } from 'class-validator';
 import { PropertyStatus } from '../../entities/property.entity';
 
 export class CreatePropertyDto {
@@ -24,7 +24,7 @@ export class CreatePropertyDto {
   status?: PropertyStatus;
 
   @IsOptional()
-  @IsString()
+  @IsUrl({ protocols: ['http', 'https'], require_protocol: true })
   imageUrl?: string;
 
   @IsOptional()
