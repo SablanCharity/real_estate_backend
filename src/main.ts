@@ -1,24 +1,20 @@
-import { ValidationPipe } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
+import { ValidationPipe } from '@nestjs/common';
+import { NestExpressApplication } from '@nestjs/platform-express';
+import { join } from 'path';
 import { AppModule } from './app.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create<NestExpressApplication>(AppModule);
 
-  // Set global API prefix (/api/v1) as required in Laboratory 05
   app.setGlobalPrefix('api/v1');
+  app.useGlobalPipes(new ValidationPipe({ whitelist: true, transform: true }));
 
-  // Enable automatic DTO validation across all incoming requests
-  app.useGlobalPipes(
-    new ValidationPipe({
-      whitelist: true,
-      forbidNonWhitelisted: true,
-      transform: true,
-    }),
-  );
+  // Serve uploaded images statically at http://localhost:3000/uploads/...
+  app.useStaticAssets(join(__dirname, '..', 'uploads'), {
+    prefix: '/uploads/',
+  });
 
-  const port = process.env.PORT || 3000;
-  await app.listen(port);
-  console.log(`Application running on: http://localhost:${port}/api/v1`);
+  await app.listen(process.env.PORT ?? 3000);
 }
 bootstrap();

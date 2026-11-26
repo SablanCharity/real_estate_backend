@@ -1,4 +1,11 @@
-import { IsEmail, IsNotEmpty, IsOptional, IsEnum, MinLength, IsString } from 'class-validator';
+import {
+  IsEmail,
+  IsNotEmpty,
+  IsOptional,
+  IsEnum,
+  IsString,
+  Matches,
+} from 'class-validator';
 import { UserRole } from '../../entities/user.entity';
 
 export class RegisterDto {
@@ -6,10 +13,14 @@ export class RegisterDto {
   @IsString()
   fullName: string;
 
-  @IsEmail()
+  @IsEmail({}, { message: 'Please provide a valid email address' })
   email: string;
 
-  @MinLength(6, { message: 'Password must be at least 6 characters long' })
+  @IsString()
+  @Matches(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[\W_]).{8,}$/, {
+    message:
+      'Password must be at least 8 characters long and include uppercase, lowercase, number, and special character',
+  })
   password: string;
 
   @IsOptional()
@@ -18,5 +29,8 @@ export class RegisterDto {
 
   @IsOptional()
   @IsString()
+  @Matches(/^09\d{9}$/, {
+    message: 'Phone number must be 11 digits starting with 09 (e.g., 09171234567)',
+  })
   phone?: string;
 }

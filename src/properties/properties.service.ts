@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, BadRequestException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Property, PropertyStatus } from '../entities/property.entity';
@@ -17,12 +17,32 @@ export class PropertiesService {
     private imageRepository: Repository<PropertyImage>,
   ) {}
 
-  async create(createPropertyDto: CreatePropertyDto, agent: User) {
+  async create(
+    createPropertyDto: CreatePropertyDto,
+    agent: User,
+    file?: Express.Multer.File,
+  ) {
+    const { imageUrl: dtoImageUrl, caption, ...propertyData } = createPropertyDto;
+
     const property = this.propertyRepository.create({
-      ...createPropertyDto,
+      ...propertyData,
       agentId: agent.userId,
     });
-    return this.propertyRepository.save(property);
+    const savedProperty = await this.propertyRepository.save(property);
+
+    const resolvedImageUrl = file
+      ? `http://localhost:3000/uploads/properties/${file.filename}`
+      : dtoImageUrl;
+
+    if (resolvedImageUrl) {
+      const image = this.imageRepository.create({
+        propertyId: savedProperty.propertyId,
+        imageUrl: resolvedImageUrl,
+      });
+      await this.imageRepository.save(image);
+    }
+
+    return this.findOne(savedProperty.propertyId);
   }
 
   async findAll(status?: PropertyStatus, location?: string) {
@@ -44,7 +64,7 @@ export class PropertiesService {
   async findOne(id: number) {
     const property = await this.propertyRepository.findOne({
       where: { propertyId: id },
-      relations: {agent: true, images: true},
+      relations: { agent: true, images: true },
     });
 
     if (!property) {
@@ -67,11 +87,26 @@ export class PropertiesService {
   }
 
   // Image operations
-  async addImage(propertyId: number, dto: CreatePropertyImageDto) {
+  async addImage(
+    propertyId: number,
+    dto: CreatePropertyImageDto,
+    file?: Express.Multer.File,
+  ) {
     const property = await this.findOne(propertyId);
+
+    const resolvedImageUrl = file
+      ? `http://localhost:3000/uploads/properties/${file.filename}`
+      : dto.imageUrl;
+
+    if (!resolvedImageUrl) {
+      throw new BadRequestException(
+        'Please upload an image file or provide a valid imageUrl.',
+      );
+    }
+
     const image = this.imageRepository.create({
       propertyId: property.propertyId,
-      imageUrl: dto.imageUrl,
+      imageUrl: resolvedImageUrl,
     });
     return this.imageRepository.save(image);
   }

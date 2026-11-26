@@ -1,4 +1,4 @@
-import { IsOptional, IsString, IsEnum } from 'class-validator';
+import { IsOptional, IsString, IsEnum, Matches } from 'class-validator';
 import { UserRole } from '../../entities/user.entity';
 
 export class UpdateUserDto {
@@ -8,6 +8,9 @@ export class UpdateUserDto {
 
   @IsOptional()
   @IsString()
+  @Matches(/^09\d{9}$/, {
+    message: 'Phone number must be 11 digits starting with 09 (e.g., 09171234567)',
+  })
   phone?: string;
 
   @IsOptional()

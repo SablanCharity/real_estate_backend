@@ -12,7 +12,15 @@ import {
   ParseIntPipe,
   HttpCode,
   HttpStatus,
+  UseInterceptors,
+  UploadedFile,
+  BadRequestException,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { diskStorage } from 'multer';
+import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer-options.interface';
+import { extname } from 'path';
+import * as fs from 'fs';
 import { PropertiesService } from './properties.service';
 import { CreatePropertyDto } from './dto/create-property.dto';
 import { UpdatePropertyDto } from './dto/update-property.dto';
@@ -22,6 +30,30 @@ import { RolesGuard } from '../auth/guards/roles.guard';
 import { Roles } from '../auth/decorators/roles.decorator';
 import { PropertyStatus } from '../entities/property.entity';
 import { UserRole } from '../entities/user.entity';
+
+const propertyImageUploadOptions: MulterOptions = {
+  storage: diskStorage({
+    destination: (req, file, cb) => {
+      const uploadPath = './uploads/properties';
+      fs.mkdirSync(uploadPath, { recursive: true });
+      cb(null, uploadPath);
+    },
+    filename: (req, file, cb) => {
+      const uniqueSuffix = `${Date.now()}-${Math.round(Math.random() * 1e9)}`;
+      cb(null, `property-${uniqueSuffix}${extname(file.originalname)}`);
+    },
+  }),
+  fileFilter: (req, file, cb) => {
+    if (!file.mimetype.match(/\/(jpg|jpeg|png|webp)$/)) {
+      return cb(
+        new BadRequestException('Only JPG, JPEG, PNG, and WEBP images are allowed.'),
+        false,
+      );
+    }
+    cb(null, true);
+  },
+  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB max
+};
 
 @Controller('properties')
 export class PropertiesController {
@@ -42,12 +74,17 @@ export class PropertiesController {
     return this.propertiesService.findOne(id);
   }
 
-  // POST /api/v1/properties (Agent, Admin)
+  // POST /api/v1/properties (Agent, Admin - supports form-data local image or raw JSON)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(UserRole.AGENT, UserRole.ADMIN)
   @Post()
-  async create(@Body() createPropertyDto: CreatePropertyDto, @Req() req: any) {
-    return this.propertiesService.create(createPropertyDto, req.user);
+  @UseInterceptors(FileInterceptor('image', propertyImageUploadOptions))
+  async create(
+    @Body() createPropertyDto: CreatePropertyDto,
+    @Req() req: any,
+    @UploadedFile() file?: Express.Multer.File,
+  ) {
+    return this.propertiesService.create(createPropertyDto, req.user, file);
   }
 
   // PATCH /api/v1/properties/:id (Agent, Admin)
@@ -76,15 +113,17 @@ export class PropertiesController {
     return this.propertiesService.findImages(id);
   }
 
-  // POST /api/v1/properties/:id/images (Agent, Admin)
+  // POST /api/v1/properties/:id/images (Agent, Admin - supports form-data local image or raw JSON)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(UserRole.AGENT, UserRole.ADMIN)
   @Post(':id/images')
+  @UseInterceptors(FileInterceptor('image', propertyImageUploadOptions))
   async addImage(
     @Param('id', ParseIntPipe) id: number,
     @Body() dto: CreatePropertyImageDto,
+    @UploadedFile() file?: Express.Multer.File,
   ) {
-    return this.propertiesService.addImage(id, dto);
+    return this.propertiesService.addImage(id, dto, file);
   }
 
   // DELETE /api/v1/properties/:id/images/:imageId (Agent, Admin)
