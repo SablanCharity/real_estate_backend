@@ -1,0 +1,11 @@
+$kind: http-request
+name: http://localhost:3000/api/v1/viewing-requests/6/logs
+description: ""
+url: http://localhost:3000/api/v1/viewing-requests/6/logs
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0pxx}}"
+examples: .resources/http-localhost-3000-api-v1-viewing-requests-6-logs.resources/examples
+order: 15000

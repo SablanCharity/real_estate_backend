@@ -1,0 +1,26 @@
+$kind: http-request
+name: http://localhost:3000/api/v1/properties/10/images
+description: ""
+url: http://localhost:3000/api/v1/properties/10/images
+method: POST
+body:
+  type: formdata
+  content:
+    - type: file
+      key: image
+      src:
+        - /C:/Users/Charity/Downloads/Cozy Living Room with Wall-Mounted TV.jpg
+      description: ""
+      disabled: false
+    - type: file
+      key: image
+      src:
+        - /C:/Users/Charity/Downloads/Luxurious bedroom.jpg
+      description: ""
+      disabled: false
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_11qy}}"
+examples: .resources/http-localhost-3000-api-v1-properties-10-images.resources/examples
+order: 21655

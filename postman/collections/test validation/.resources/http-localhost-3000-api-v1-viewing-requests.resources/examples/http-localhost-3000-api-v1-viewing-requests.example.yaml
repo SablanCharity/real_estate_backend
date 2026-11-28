@@ -1,0 +1,40 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/viewing-requests
+request:
+  url: http://localhost:3000/api/v1/viewing-requests
+  method: POST
+  body:
+    type: json
+    content: "{\r
+
+      \  \"propertyId\": 10,\r
+
+      \  \"scheduledDate\": \"2026-12-10T10:00:00Z\",\r
+
+      \  \"requestNotes\": \"Morning property tour with family; would like to check the garden and parking area.\"\r
+
+      }"
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "248"
+    ETag: W/"f8-+psYgwjwhQ02jpVvG2VxFyYKYF8"
+    Date: Sat, 28 Nov 2026 02:40:20 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      {
+        "requestId": 8,
+        "customerId": 11,
+        "propertyId": 6,
+        "scheduledDate": "2026-12-10T10:00:00.000Z",
+        "status": "Pending",
+        "requestNotes": "Morning property tour with family; would like to check the garden and parking area.",
+        "createdAt": "2026-11-28T02:40:20.194Z"
+      }
+order: 1000

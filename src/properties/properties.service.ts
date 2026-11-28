@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException, BadRequestException, ForbiddenException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import { unlink } from 'fs/promises';
 import { Property, PropertyStatus } from '../entities/property.entity';
 import { PropertyImage } from '../entities/property-image.entity';
 import { CreatePropertyDto } from './dto/create-property.dto';
@@ -20,32 +21,50 @@ export class PropertiesService {
   async create(
     createPropertyDto: CreatePropertyDto,
     agent: User,
-    file?: Express.Multer.File,
+    files: Express.Multer.File[] = [],
   ) {
     const { imageUrl: dtoImageUrl, caption, ...propertyData } = createPropertyDto;
+    let savedProperty: Property | undefined;
 
-    const property = this.propertyRepository.create({
-      ...propertyData,
-      agentId: agent.userId,
-    });
-    const savedProperty = await this.propertyRepository.save(property);
-
-    const resolvedImageUrl = file
-      ? `http://localhost:3000/uploads/properties/${file.filename}`
-      : dtoImageUrl;
-
-    if (resolvedImageUrl) {
-      const image = this.imageRepository.create({
-        propertyId: savedProperty.propertyId,
-        imageUrl: resolvedImageUrl,
+    try {
+      const property = this.propertyRepository.create({
+        ...propertyData,
+        agentId: agent.userId,
       });
-      await this.imageRepository.save(image);
-    }
+      savedProperty = await this.propertyRepository.save(property);
 
-    return this.findOne(savedProperty.propertyId);
+      const imageUrls = files.length
+        ? files.map((file) => `http://localhost:3000/uploads/properties/${file.filename}`)
+        : dtoImageUrl
+          ? [dtoImageUrl]
+          : [];
+
+      if (imageUrls.length) {
+        await this.imageRepository.save(
+          imageUrls.map((imageUrl) =>
+            this.imageRepository.create({
+              propertyId: savedProperty!.propertyId,
+              imageUrl,
+            }),
+          ),
+        );
+      }
+
+      return this.findOne(savedProperty.propertyId);
+    } catch (error) {
+      await this.cleanupUploadedFiles(files);
+      if (savedProperty) {
+        await this.propertyRepository.delete(savedProperty.propertyId).catch(() => undefined);
+      }
+      throw error;
+    }
   }
 
-  async findAll(status?: PropertyStatus, location?: string) {
+  private async cleanupUploadedFiles(files: Express.Multer.File[]) {
+    await Promise.all(files.map((file) => unlink(file.path).catch(() => undefined)));
+  }
+
+  async findAll(status?: PropertyStatus, location?: string, maxPrice?: number) {
     const query = this.propertyRepository.createQueryBuilder('property')
       .leftJoinAndSelect('property.agent', 'agent')
       .leftJoinAndSelect('property.images', 'images')
@@ -62,6 +81,10 @@ export class PropertiesService {
 
     if (location) {
       query.andWhere('property.location LIKE :location', { location: `%${location}%` });
+    }
+
+    if (maxPrice !== undefined) {
+      query.andWhere('property.price <= :maxPrice', { maxPrice });
     }
 
     return query.getMany();
@@ -112,26 +135,36 @@ export class PropertiesService {
     propertyId: number,
     dto: CreatePropertyImageDto,
     user: User,
-    file?: Express.Multer.File,
+    files: Express.Multer.File[] = [],
   ) {
-    const property = await this.findOne(propertyId);
-    this.assertCanManage(property, user);
+    try {
+      const property = await this.findOne(propertyId);
+      this.assertCanManage(property, user);
 
-    const resolvedImageUrl = file
-      ? `http://localhost:3000/uploads/properties/${file.filename}`
-      : dto.imageUrl;
+      const imageUrls = files.length
+        ? files.map((file) => `http://localhost:3000/uploads/properties/${file.filename}`)
+        : dto.imageUrl
+          ? [dto.imageUrl]
+          : [];
 
-    if (!resolvedImageUrl) {
-      throw new BadRequestException(
-        'Please upload an image file or provide a valid imageUrl.',
+      if (!imageUrls.length) {
+        throw new BadRequestException(
+          'Please upload one or more image files or provide a valid imageUrl.',
+        );
+      }
+
+      return this.imageRepository.save(
+        imageUrls.map((imageUrl) =>
+          this.imageRepository.create({
+            propertyId: property.propertyId,
+            imageUrl,
+          }),
+        ),
       );
+    } catch (error) {
+      await this.cleanupUploadedFiles(files);
+      throw error;
     }
-
-    const image = this.imageRepository.create({
-      propertyId: property.propertyId,
-      imageUrl: resolvedImageUrl,
-    });
-    return this.imageRepository.save(image);
   }
 
   async findImages(propertyId: number) {

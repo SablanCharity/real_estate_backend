@@ -1,0 +1,36 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/viewing-requests
+request:
+  url: http://localhost:3000/api/v1/viewing-requests
+  method: POST
+  body:
+    type: json
+    content: "{\r
+
+      \  \"propertyId\": 10,\r
+
+      \  \"scheduledDate\": \"2026-12-10T10:00:00Z\",\r
+
+      \  \"requestNotes\": \"Morning property tour with family; would like to check the garden and parking area.\"\r
+
+      }"
+response:
+  statusCode: 409
+  statusText: Conflict
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "111"
+    ETag: W/"6f-5HyUdn/vygnqX5xlVK9SVDEoMNE"
+    Date: Sat, 28 Nov 2026 02:46:46 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      {
+        "message": "You already have a pending viewing request for this property.",
+        "error": "Conflict",
+        "statusCode": 409
+      }
+order: 1000

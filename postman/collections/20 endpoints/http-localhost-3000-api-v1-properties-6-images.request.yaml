@@ -1,0 +1,20 @@
+$kind: http-request
+name: http://localhost:3000/api/v1/properties/6/images
+description: ""
+url: http://localhost:3000/api/v1/properties/6/images
+method: POST
+body:
+  type: formdata
+  content:
+    - type: file
+      key: image
+      src:
+        - /C:/Users/Charity/Downloads/download (19).jpg
+      description: ""
+      disabled: false
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0pxx}}"
+examples: .resources/http-localhost-3000-api-v1-properties-6-images.resources/examples
+order: 7000

@@ -1,0 +1,41 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/auth/register
+request:
+  url: http://localhost:3000/api/v1/auth/register
+  method: POST
+  body:
+    type: json
+    content: "{\r
+
+      \  \"fullName\": \"Blessy Arellano\",\r
+
+      \  \"email\": \"blemgs@gmail.com\",\r
+
+      \  \"password\": \"Password123!\",\r
+
+      \  \"phone\": \"09108745305\"\r
+
+      }"
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "148"
+    ETag: W/"94-reFRNM0J074N/roAWdAgJNGr+uk"
+    Date: Fri, 27 Nov 2026 15:15:04 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      {
+        "userId": 11,
+        "fullName": "Blessy Arellano",
+        "email": "blemgs@gmail.com",
+        "role": "Customer",
+        "phone": "09108745305",
+        "createdAt": "2026-11-27T15:15:04.616Z"
+      }
+order: 1000

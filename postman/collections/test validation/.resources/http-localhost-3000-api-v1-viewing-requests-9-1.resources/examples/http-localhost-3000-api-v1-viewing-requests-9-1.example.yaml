@@ -1,0 +1,34 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/viewing-requests/9
+request:
+  url: http://localhost:3000/api/v1/viewing-requests/9
+  method: PATCH
+  body:
+    type: json
+    content: "{\r
+
+      \    \"status\":\"Not Accepted\"\r
+
+      }"
+response:
+  statusCode: 400
+  statusText: Bad Request
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "111"
+    ETag: W/"6f-3xG8YSstM70VEg12XZhn1iSIGJI"
+    Date: Sat, 28 Nov 2026 03:06:10 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      {
+        "message": [
+          "Status must be Pending, Approved, Rejected, or Completed"
+        ],
+        "error": "Bad Request",
+        "statusCode": 400
+      }
+order: 2000

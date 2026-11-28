@@ -1,0 +1,38 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/auth/login
+request:
+  url: http://localhost:3000/api/v1/auth/login
+  method: POST
+  body:
+    type: json
+    content: "{\r
+
+      \    \"email\": \"blemgs@gmail.com\",\r
+
+      \    \"password\": \"Password123!\"\r
+
+      }"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "313"
+    ETag: W/"139-p6NvyeitZVjzyc24ReswS2DiOEI"
+    Date: Fri, 27 Nov 2026 15:21:43 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      {
+        "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjExLCJlbWFpbCI6ImJsZW1nc0BnbWFpbC5jb20iLCJyb2xlIjoiQ3VzdG9tZXIiLCJpYXQiOjE3OTU3OTI5MDMsImV4cCI6MTc5NTg3OTMwM30.tdA6cEkZyJaBHbsp-0UbHowdm0IT5wCuOwQ51H5qCqY",
+        "user": {
+          "userId": 11,
+          "fullName": "Blessy Arellano",
+          "email": "blemgs@gmail.com",
+          "role": "Customer"
+        }
+      }
+order: 1000

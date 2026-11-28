@@ -1,0 +1,9 @@
+$kind: http-request
+name: http://localhost:3000/api/v1/properties
+description: ""
+url: http://localhost:3000/api/v1/properties?=status=Available
+method: GET
+queryParams:
+  "": status=Available
+examples: .resources/http-localhost-3000-api-v1-properties.resources/examples
+order: 11000

@@ -1,0 +1,28 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/properties/6/images
+request:
+  url: http://localhost:3000/api/v1/properties/6/images
+  method: GET
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "161"
+    ETag: W/"a1-U3AY2TNjYKDfXTM0FUc4aO2X+K8"
+    Date: Sat, 28 Nov 2026 02:07:55 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "imageId": 6,
+          "propertyId": 6,
+          "imageUrl": "http://localhost:3000/uploads/properties/property-1795730859335-305408112.jpg",
+          "uploadedAt": "2026-11-26T22:07:39.355Z"
+        }
+      ]
+order: 1000

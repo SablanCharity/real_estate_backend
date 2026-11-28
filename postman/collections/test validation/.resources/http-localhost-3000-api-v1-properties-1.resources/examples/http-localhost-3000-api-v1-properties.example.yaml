@@ -1,0 +1,27 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/properties
+request:
+  url: http://localhost:3000/api/v1/properties?maxPrice=abc
+  method: GET
+  queryParams:
+    maxPrice: abc
+response:
+  statusCode: 400
+  statusText: Bad Request
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "92"
+    ETag: W/"5c-XZq9rHCMR+t9e+/va2nKSDsx5SU"
+    Date: Fri, 27 Nov 2026 16:06:55 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      {
+        "message": "maxPrice must be a non-negative number.",
+        "error": "Bad Request",
+        "statusCode": 400
+      }
+order: 1000

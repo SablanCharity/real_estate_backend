@@ -1,0 +1,13 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/properties/6
+description: ""
+request:
+  url: http://localhost:3000/api/v1/properties/6
+  method: GET
+response:
+  statusCode: 200
+  statusText: ""
+  body:
+    type: json
+    content: '{"propertyId":6,"agentId":7,"title":"Modern Zen 2-Storey House in Tagaytay","description":"4 bedrooms, 3 bathrooms, open-concept living area, landscaped Zen garden, and dual upstairs balconies","price":"12500000.00","location":"Tagaytay, Cavite","status":"Available","createdAt":"2026-11-26T21:23:13.416Z","agent":{"userId":7,"fullName":"Kathryn Bernardo"},"images":[]}'
+order: 1000

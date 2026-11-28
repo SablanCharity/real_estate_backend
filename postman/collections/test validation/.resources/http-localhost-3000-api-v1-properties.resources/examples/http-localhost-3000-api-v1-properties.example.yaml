@@ -1,0 +1,61 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/properties
+request:
+  url: http://localhost:3000/api/v1/properties?=status=Available
+  method: GET
+  queryParams:
+    "": status=Available
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "841"
+    ETag: W/"349-mw4EL1h86MXYCM7Iz60cLgxKER8"
+    Date: Fri, 27 Nov 2026 16:00:19 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "propertyId": 4,
+          "agentId": 5,
+          "title": "Modern 2-Storey House in Imus",
+          "description": "Updated price: 3 bedrooms, 2 bathrooms near commercial hub",
+          "price": "6200000.00",
+          "location": "Imus, Cavite",
+          "status": "Available",
+          "createdAt": "2026-11-26T14:17:50.513Z",
+          "agent": {
+            "userId": 5,
+            "fullName": "Gehlee Dangca"
+          },
+          "images": []
+        },
+        {
+          "propertyId": 6,
+          "agentId": 7,
+          "title": "Modern Zen 2-Storey House in Tagaytay",
+          "description": "4 bedrooms, 3 bathrooms, open-concept living area, landscaped Zen garden, and dual upstairs balconies",
+          "price": "10000000.00",
+          "location": "Tagaytay, Cavite",
+          "status": "Available",
+          "createdAt": "2026-11-26T21:23:13.416Z",
+          "agent": {
+            "userId": 7,
+            "fullName": "Kathryn Bernardo"
+          },
+          "images": [
+            {
+              "imageId": 6,
+              "propertyId": 6,
+              "imageUrl": "http://localhost:3000/uploads/properties/property-1795730859335-305408112.jpg",
+              "uploadedAt": "2026-11-26T22:07:39.355Z"
+            }
+          ]
+        }
+      ]
+order: 1000

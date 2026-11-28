@@ -1,0 +1,40 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/viewing-requests
+request:
+  url: http://localhost:3000/api/v1/viewing-requests
+  method: POST
+  body:
+    type: json
+    content: "{\r
+
+      \  \"propertyId\": 6,\r
+
+      \  \"scheduledDate\": \"2026-12-05T10:00:00Z\",\r
+
+      \  \"requestNotes\": \"Morning Viewing\"\r
+
+      }"
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "179"
+    ETag: W/"b3-zX7y5y3UfpEdr4ddLgrRKfwv6Hw"
+    Date: Fri, 27 Nov 2026 04:47:33 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      {
+        "requestId": 6,
+        "customerId": 9,
+        "propertyId": 6,
+        "scheduledDate": "2026-12-05T10:00:00.000Z",
+        "status": "Pending",
+        "requestNotes": "Morning Viewing",
+        "createdAt": "2026-11-27T04:47:33.467Z"
+      }
+order: 1000

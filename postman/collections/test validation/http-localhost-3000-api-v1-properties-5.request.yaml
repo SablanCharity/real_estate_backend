@@ -1,0 +1,26 @@
+$kind: http-request
+name: http://localhost:3000/api/v1/properties
+description: ""
+url: http://localhost:3000/api/v1/properties
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"title\": \"Modern Brick & Stone 2-Storey House in Nuvali\",\r
+
+    \  \"description\": \"4 bedrooms, 3 bathrooms, double-height glass living area, stone perimeter wall, and landscaped garden\",\r
+
+    \  \"price\": 15800000,\r
+
+    \  \"location\": \"Santa Rosa, Laguna\",\r
+
+    \  \"status\": \"Available\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0au3}}"
+examples: .resources/http-localhost-3000-api-v1-properties-5.resources/examples
+order: 18655

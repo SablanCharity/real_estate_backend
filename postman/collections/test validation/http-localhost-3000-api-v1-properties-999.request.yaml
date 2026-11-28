@@ -1,0 +1,20 @@
+$kind: http-request
+name: http://localhost:3000/api/v1/properties/999
+description: ""
+url: http://localhost:3000/api/v1/properties/999/images
+method: POST
+body:
+  type: formdata
+  content:
+    - type: file
+      key: ""
+      src:
+        - /C:/Users/Charity/Downloads/balcony idea.jpg
+      description: ""
+      disabled: false
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_11qy}}"
+examples: .resources/http-localhost-3000-api-v1-properties-999.resources/examples
+order: 22655

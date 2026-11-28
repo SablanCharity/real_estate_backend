@@ -1,0 +1,10 @@
+$kind: http-request
+name: http://localhost:3000/api/v1/viewing-requests/9
+description: ""
+url: http://localhost:3000/api/v1/viewing-requests/9
+method: GET
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_11qy}}"
+order: 28655

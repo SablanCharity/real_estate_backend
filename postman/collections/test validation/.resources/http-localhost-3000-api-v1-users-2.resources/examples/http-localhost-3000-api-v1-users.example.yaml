@@ -1,0 +1,25 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/users
+request:
+  url: http://localhost:3000/api/v1/users
+  method: GET
+response:
+  statusCode: 403
+  statusText: Forbidden
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "95"
+    ETag: W/"5f-oQnQVMK/oMW7DBbpUPqSJooL+q8"
+    Date: Fri, 27 Nov 2026 15:27:39 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      {
+        "message": "Access denied: insufficient role privileges.",
+        "error": "Forbidden",
+        "statusCode": 403
+      }
+order: 1000

@@ -1,0 +1,33 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/users/9
+request:
+  url: http://localhost:3000/api/v1/users/9
+  method: PATCH
+  body:
+    type: json
+    content: "{\r
+
+      \  \"phone\": \"09985337777\"\r
+
+      }"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "99"
+    ETag: W/"63-7zJkNtmxp9PEBNlwazzruhtZPvU"
+    Date: Fri, 27 Nov 2026 05:24:55 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      {
+        "userId": 9,
+        "email": "herch@gmail.com",
+        "phone": "09985337777",
+        "createdAt": "2026-11-26T21:08:09.450Z"
+      }
+order: 1000

@@ -1,0 +1,49 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/properties/10/images
+request:
+  url: http://localhost:3000/api/v1/properties/10/images
+  method: POST
+  body:
+    type: formdata
+    content:
+      - type: file
+        key: image
+        src:
+          - /C:/Users/Charity/Downloads/Cozy Living Room with Wall-Mounted TV.jpg
+        description: ""
+        disabled: false
+      - type: file
+        key: image
+        src:
+          - /C:/Users/Charity/Downloads/Luxurious bedroom.jpg
+        description: ""
+        disabled: false
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "323"
+    ETag: W/"143-SjHz+rfmdaD0gmGQ4xzwac12u8s"
+    Date: Sat, 28 Nov 2026 02:16:20 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "imageId": 8,
+          "propertyId": 10,
+          "imageUrl": "http://localhost:3000/uploads/properties/property-1795832179985-766966007.jpg",
+          "uploadedAt": "2026-11-28T02:16:20.046Z"
+        },
+        {
+          "imageId": 9,
+          "propertyId": 10,
+          "imageUrl": "http://localhost:3000/uploads/properties/property-1795832180011-487098102.jpg",
+          "uploadedAt": "2026-11-28T02:16:20.081Z"
+        }
+      ]
+order: 1000

@@ -1,0 +1,22 @@
+$kind: http-request
+name: http://localhost:3000/api/v1/viewing-requests
+description: ""
+url: http://localhost:3000/api/v1/viewing-requests
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"propertyId\": 6,\r
+
+    \  \"scheduledDate\": \"2026-12-05T10:00:00Z\",\r
+
+    \  \"requestNotes\": \"Morning Viewing\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0mpq}}"
+examples: .resources/http-localhost-3000-api-v1-viewing-requests.resources/examples
+order: 11000

@@ -1,0 +1,17 @@
+$kind: http-request
+name: http://localhost:3000/api/v1
+description: ""
+url: http://localhost:3000/api/v1/users/6
+method: DELETE
+body:
+  type: json
+  content: "{\r
+
+    \    \"phone\":\"09875671926\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0ygl}}"
+order: 2000

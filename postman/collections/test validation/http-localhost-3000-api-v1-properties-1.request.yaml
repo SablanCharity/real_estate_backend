@@ -1,0 +1,9 @@
+$kind: http-request
+name: http://localhost:3000/api/v1/properties
+description: ""
+url: http://localhost:3000/api/v1/properties?maxPrice=7000000
+method: GET
+queryParams:
+  maxPrice: "7000000"
+examples: .resources/http-localhost-3000-api-v1-properties-1.resources/examples
+order: 12000

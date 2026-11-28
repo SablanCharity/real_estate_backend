@@ -1,0 +1,28 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/users/9
+request:
+  url: http://localhost:3000/api/v1/users/9
+  method: GET
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "148"
+    ETag: W/"94-ED5/+unSj+1srnKW35mlgtBHzfI"
+    Date: Fri, 27 Nov 2026 15:30:31 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      {
+        "userId": 9,
+        "fullName": "Herchelle Manzano",
+        "email": "herch@gmail.com",
+        "role": "Customer",
+        "phone": "09985337777",
+        "createdAt": "2026-11-26T21:08:09.450Z"
+      }
+order: 2000

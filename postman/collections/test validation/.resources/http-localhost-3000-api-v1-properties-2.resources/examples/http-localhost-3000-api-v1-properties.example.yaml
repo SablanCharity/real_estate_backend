@@ -1,0 +1,50 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/properties
+request:
+  url: http://localhost:3000/api/v1/properties
+  method: POST
+  body:
+    type: json
+    content: "{\r
+
+      \  \"title\": \"Modern Brick & Stone 2-Storey House in Nuvali\",\r
+
+      \  \"description\": \"4 bedrooms, 3 bathrooms, double-height glass living area, stone perimeter wall, and landscaped garden\",\r
+
+      \  \"price\": 15800000,\r
+
+      \  \"location\": \"Santa Rosa, Laguna\",\r
+
+      \  \"status\": \"Available\"\r
+
+      }"
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "379"
+    ETag: W/"17b-JRG8Hr1rFMz7VPqTtKSIk6tykIE"
+    Date: Fri, 27 Nov 2026 16:29:28 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      {
+        "propertyId": 8,
+        "agentId": 7,
+        "title": "Modern Brick & Stone 2-Storey House in Nuvali",
+        "description": "4 bedrooms, 3 bathrooms, double-height glass living area, stone perimeter wall, and landscaped garden",
+        "price": "15800000.00",
+        "location": "Santa Rosa, Laguna",
+        "status": "Available",
+        "createdAt": "2026-11-27T16:29:28.781Z",
+        "agent": {
+          "userId": 7,
+          "fullName": "Kathryn Bernardo"
+        },
+        "images": []
+      }
+order: 1000

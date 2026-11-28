@@ -1,0 +1,18 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/users/3
+request:
+  url: http://localhost:3000/api/v1/users/3
+  method: DELETE
+response:
+  statusCode: 204
+  statusText: No Content
+  headers:
+    X-Powered-By: Express
+    ETag: W/"2b-q0y3lGPAQXS4RGB5ehrd+P85hNg"
+    Date: Fri, 27 Nov 2026 15:54:50 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: text
+    content: ""
+order: 1000

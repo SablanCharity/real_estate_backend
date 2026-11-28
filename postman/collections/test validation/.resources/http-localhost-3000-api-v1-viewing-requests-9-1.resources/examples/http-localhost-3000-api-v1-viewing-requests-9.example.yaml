@@ -1,0 +1,60 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/viewing-requests/9
+request:
+  url: http://localhost:3000/api/v1/viewing-requests/9
+  method: PATCH
+  body:
+    type: json
+    content: "{\r\n    \"status\":\"Approved\"\r\n}"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "903"
+    ETag: W/"387-HLPadY7Ptvgdgu+gRMdk/4/jHCM"
+    Date: Sat, 28 Nov 2026 03:03:44 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      {
+        "requestId": 9,
+        "customerId": 11,
+        "propertyId": 10,
+        "scheduledDate": "2026-12-10T10:00:00.000Z",
+        "status": "Approved",
+        "requestNotes": "Morning property tour with family; would like to check the garden and parking area.",
+        "createdAt": "2026-11-28T02:41:26.278Z",
+        "customer": {
+          "userId": 11,
+          "fullName": "Blessy Arellano",
+          "email": "blemgs@gmail.com",
+          "role": "Customer",
+          "phone": "09108745305",
+          "createdAt": "2026-11-27T15:15:04.616Z"
+        },
+        "property": {
+          "propertyId": 10,
+          "agentId": 5,
+          "title": "Modern Japanese-Inspired 2-Storey Villa in Tagaytay",
+          "description": "4 bedrooms, 4 bathrooms, sunlit family lounge, slatted wood upper balcony, natural stone wall, and private garden",
+          "price": "17200000.00",
+          "location": "Tagaytay, Cavite",
+          "status": "Available",
+          "createdAt": "2026-11-28T02:13:00.118Z"
+        },
+        "logs": [
+          {
+            "logId": 13,
+            "requestId": 9,
+            "updatedBy": 11,
+            "status": "Pending",
+            "remarks": "Viewing request submitted.",
+            "updatedAt": "2026-11-28T02:41:26.320Z"
+          }
+        ]
+      }
+order: 1000

@@ -7,16 +7,16 @@ import {
   Body,
   Param,
   Query,
+  BadRequestException,
   UseGuards,
   Req,
   ParseIntPipe,
   HttpCode,
   HttpStatus,
   UseInterceptors,
-  UploadedFile,
-  BadRequestException,
+  UploadedFiles,
 } from '@nestjs/common';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileFieldsInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { MulterOptions } from '@nestjs/platform-express/multer/interfaces/multer-options.interface';
 import { join } from 'path';
@@ -57,7 +57,7 @@ const propertyImageUploadOptions: MulterOptions = {
     }
     cb(null, true);
   },
-  limits: { fileSize: 5 * 1024 * 1024 }, // 5MB max
+  limits: { fileSize: 5 * 1024 * 1024, files: 10 }, // 5MB per file, 10 files max
 };
 
 @Controller('properties')
@@ -69,8 +69,17 @@ export class PropertiesController {
   async findAll(
     @Query('status') status?: PropertyStatus,
     @Query('location') location?: string,
+    @Query('maxPrice') maxPrice?: string,
   ) {
-    return this.propertiesService.findAll(status, location);
+    let parsedMaxPrice: number | undefined;
+    if (maxPrice !== undefined) {
+      parsedMaxPrice = Number(maxPrice);
+      if (maxPrice.trim() === '' || !Number.isFinite(parsedMaxPrice) || parsedMaxPrice < 0) {
+        throw new BadRequestException('maxPrice must be a non-negative number.');
+      }
+    }
+
+    return this.propertiesService.findAll(status, location, parsedMaxPrice);
   }
 
   // GET /api/v1/properties/:id (Public)
@@ -83,13 +92,26 @@ export class PropertiesController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(UserRole.AGENT, UserRole.ADMIN)
   @Post()
-  @UseInterceptors(FileInterceptor('image', propertyImageUploadOptions))
+  @UseInterceptors(
+    FileFieldsInterceptor(
+      [
+        { name: 'images', maxCount: 10 },
+        { name: 'image', maxCount: 10 },
+      ],
+      propertyImageUploadOptions,
+    ),
+  )
   async create(
     @Body() createPropertyDto: CreatePropertyDto,
     @Req() req: any,
-    @UploadedFile() file?: Express.Multer.File,
+    @UploadedFiles()
+    files?: { images?: Express.Multer.File[]; image?: Express.Multer.File[] },
   ) {
-    return this.propertiesService.create(createPropertyDto, req.user, file);
+    return this.propertiesService.create(
+      createPropertyDto,
+      req.user,
+      [...(files?.images ?? []), ...(files?.image ?? [])],
+    );
   }
 
   // PATCH /api/v1/properties/:id (Agent, Admin)
@@ -123,14 +145,28 @@ export class PropertiesController {
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(UserRole.AGENT, UserRole.ADMIN)
   @Post(':id/images')
-  @UseInterceptors(FileInterceptor('image', propertyImageUploadOptions))
+  @UseInterceptors(
+    FileFieldsInterceptor(
+      [
+        { name: 'images', maxCount: 10 },
+        { name: 'image', maxCount: 10 },
+      ],
+      propertyImageUploadOptions,
+    ),
+  )
   async addImage(
     @Param('id', ParseIntPipe) id: number,
     @Body() dto: CreatePropertyImageDto,
     @Req() req: any,
-    @UploadedFile() file?: Express.Multer.File,
+    @UploadedFiles()
+    files?: { images?: Express.Multer.File[]; image?: Express.Multer.File[] },
   ) {
-    return this.propertiesService.addImage(id, dto, req.user, file);
+    return this.propertiesService.addImage(
+      id,
+      dto,
+      req.user,
+      [...(files?.images ?? []), ...(files?.image ?? [])],
+    );
   }
 
   // DELETE /api/v1/properties/:id/images/:imageId (Agent, Admin)

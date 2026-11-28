@@ -1,0 +1,66 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/viewing-requests/6
+request:
+  url: http://localhost:3000/api/v1/viewing-requests/6
+  method: PATCH
+  body:
+    type: json
+    content: "{\r
+
+      \  \"status\": \"Approved\",\r
+
+      \  \"remarks\": \"Schedule confirmed. Agent will meet you at the main gate.\"\r
+
+      }"
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "804"
+    ETag: W/"324-qqCaAhJGj7R36lyBIF3JkxZE4oE"
+    Date: Fri, 27 Nov 2026 05:05:10 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      {
+        "requestId": 6,
+        "customerId": 9,
+        "propertyId": 6,
+        "scheduledDate": "2026-12-05T10:00:00.000Z",
+        "status": "Approved",
+        "requestNotes": "Morning Viewing",
+        "createdAt": "2026-11-27T04:47:33.467Z",
+        "customer": {
+          "userId": 9,
+          "fullName": "Herchelle Manzano",
+          "email": "herch@gmail.com",
+          "role": "Customer",
+          "phone": "09102030405",
+          "createdAt": "2026-11-26T21:08:09.450Z"
+        },
+        "property": {
+          "propertyId": 6,
+          "agentId": 7,
+          "title": "Modern Zen 2-Storey House in Tagaytay",
+          "description": "4 bedrooms, 3 bathrooms, open-concept living area, landscaped Zen garden, and dual upstairs balconies",
+          "price": "10000000.00",
+          "location": "Tagaytay, Cavite",
+          "status": "Available",
+          "createdAt": "2026-11-26T21:23:13.416Z"
+        },
+        "logs": [
+          {
+            "logId": 9,
+            "requestId": 6,
+            "updatedBy": 9,
+            "status": "Pending",
+            "remarks": "Viewing request submitted.",
+            "updatedAt": "2026-11-27T04:47:33.476Z"
+          }
+        ]
+      }
+order: 1000

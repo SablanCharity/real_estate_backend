@@ -1,0 +1,76 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/viewing-requests
+request:
+  url: http://localhost:3000/api/v1/viewing-requests
+  method: GET
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "1325"
+    ETag: W/"52d-eo2V/h2OVBqgG4AOW09Fr4NIgHg"
+    Date: Fri, 27 Nov 2026 04:57:46 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "requestId": 6,
+          "customerId": 9,
+          "propertyId": 6,
+          "scheduledDate": "2026-12-05T10:00:00.000Z",
+          "status": "Pending",
+          "requestNotes": "Morning Viewing",
+          "createdAt": "2026-11-27T04:47:33.467Z",
+          "customer": {
+            "userId": 9,
+            "fullName": "Herchelle Manzano",
+            "email": "herch@gmail.com",
+            "role": "Customer",
+            "phone": "09102030405",
+            "createdAt": "2026-11-26T21:08:09.450Z"
+          },
+          "property": {
+            "propertyId": 6,
+            "agentId": 7,
+            "title": "Modern Zen 2-Storey House in Tagaytay",
+            "description": "4 bedrooms, 3 bathrooms, open-concept living area, landscaped Zen garden, and dual upstairs balconies",
+            "price": "10000000.00",
+            "location": "Tagaytay, Cavite",
+            "status": "Available",
+            "createdAt": "2026-11-26T21:23:13.416Z"
+          }
+        },
+        {
+          "requestId": 7,
+          "customerId": 8,
+          "propertyId": 6,
+          "scheduledDate": "2026-12-05T14:00:00.000Z",
+          "status": "Pending",
+          "requestNotes": "Saturday afternoon viewing",
+          "createdAt": "2026-11-27T04:57:34.282Z",
+          "customer": {
+            "userId": 8,
+            "fullName": "Nadine Lustre",
+            "email": "Nadine@gmail.com",
+            "role": "Customer",
+            "phone": "09846273828",
+            "createdAt": "2026-11-26T20:47:24.553Z"
+          },
+          "property": {
+            "propertyId": 6,
+            "agentId": 7,
+            "title": "Modern Zen 2-Storey House in Tagaytay",
+            "description": "4 bedrooms, 3 bathrooms, open-concept living area, landscaped Zen garden, and dual upstairs balconies",
+            "price": "10000000.00",
+            "location": "Tagaytay, Cavite",
+            "status": "Available",
+            "createdAt": "2026-11-26T21:23:13.416Z"
+          }
+        }
+      ]
+order: 2000

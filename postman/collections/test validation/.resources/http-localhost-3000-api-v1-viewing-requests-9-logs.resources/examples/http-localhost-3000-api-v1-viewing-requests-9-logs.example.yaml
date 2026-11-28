@@ -1,0 +1,54 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/viewing-requests/9/logs
+request:
+  url: http://localhost:3000/api/v1/viewing-requests/9/logs
+  method: GET
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "603"
+    ETag: W/"25b-c/pBZNJFveFGJYboqPQPsbEWKEI"
+    Date: Sat, 28 Nov 2026 03:10:06 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "logId": 15,
+          "requestId": 9,
+          "updatedBy": 5,
+          "status": "Approved",
+          "remarks": "Status updated to Approved",
+          "updatedAt": "2026-11-28T03:03:44.197Z",
+          "updatedByUser": {
+            "userId": 5,
+            "fullName": "Gehlee Dangca",
+            "email": "gehlee@gmail.com",
+            "role": "Agent",
+            "phone": "09171234567",
+            "createdAt": "2026-11-26T07:56:46.045Z"
+          }
+        },
+        {
+          "logId": 13,
+          "requestId": 9,
+          "updatedBy": 11,
+          "status": "Pending",
+          "remarks": "Viewing request submitted.",
+          "updatedAt": "2026-11-28T02:41:26.320Z",
+          "updatedByUser": {
+            "userId": 11,
+            "fullName": "Blessy Arellano",
+            "email": "blemgs@gmail.com",
+            "role": "Customer",
+            "phone": "09108745305",
+            "createdAt": "2026-11-27T15:15:04.616Z"
+          }
+        }
+      ]
+order: 1000

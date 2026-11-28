@@ -1,0 +1,25 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/properties/555
+request:
+  url: http://localhost:3000/api/v1/properties/555
+  method: GET
+response:
+  statusCode: 404
+  statusText: Not Found
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "82"
+    ETag: W/"52-oJbPzT05kweKrUwCCdBnuxyQswQ"
+    Date: Fri, 27 Nov 2026 16:21:00 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      {
+        "message": "Property with ID 555 not found.",
+        "error": "Not Found",
+        "statusCode": 404
+      }
+order: 1000

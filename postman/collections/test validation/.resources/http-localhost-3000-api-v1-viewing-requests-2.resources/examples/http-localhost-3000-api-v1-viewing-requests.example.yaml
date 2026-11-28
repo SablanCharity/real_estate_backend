@@ -1,0 +1,78 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/viewing-requests
+request:
+  url: http://localhost:3000/api/v1/viewing-requests?status=Pending
+  method: GET
+  queryParams:
+    status: Pending
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "1441"
+    ETag: W/"5a1-MIMXFlwwVzj2tqNLO9+3ghCB2vw"
+    Date: Sat, 28 Nov 2026 02:56:02 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "requestId": 9,
+          "customerId": 11,
+          "propertyId": 10,
+          "scheduledDate": "2026-12-10T10:00:00.000Z",
+          "status": "Pending",
+          "requestNotes": "Morning property tour with family; would like to check the garden and parking area.",
+          "createdAt": "2026-11-28T02:41:26.278Z",
+          "customer": {
+            "userId": 11,
+            "fullName": "Blessy Arellano",
+            "email": "blemgs@gmail.com",
+            "role": "Customer",
+            "phone": "09108745305",
+            "createdAt": "2026-11-27T15:15:04.616Z"
+          },
+          "property": {
+            "propertyId": 10,
+            "agentId": 5,
+            "title": "Modern Japanese-Inspired 2-Storey Villa in Tagaytay",
+            "description": "4 bedrooms, 4 bathrooms, sunlit family lounge, slatted wood upper balcony, natural stone wall, and private garden",
+            "price": "17200000.00",
+            "location": "Tagaytay, Cavite",
+            "status": "Available",
+            "createdAt": "2026-11-28T02:13:00.118Z"
+          }
+        },
+        {
+          "requestId": 10,
+          "customerId": 8,
+          "propertyId": 10,
+          "scheduledDate": "2026-10-10T10:00:00.000Z",
+          "status": "Pending",
+          "requestNotes": "Morning Viewing.",
+          "createdAt": "2026-11-28T02:53:39.875Z",
+          "customer": {
+            "userId": 8,
+            "fullName": "Nadine Lustre",
+            "email": "Nadine@gmail.com",
+            "role": "Customer",
+            "phone": "09846273828",
+            "createdAt": "2026-11-26T20:47:24.553Z"
+          },
+          "property": {
+            "propertyId": 10,
+            "agentId": 5,
+            "title": "Modern Japanese-Inspired 2-Storey Villa in Tagaytay",
+            "description": "4 bedrooms, 4 bathrooms, sunlit family lounge, slatted wood upper balcony, natural stone wall, and private garden",
+            "price": "17200000.00",
+            "location": "Tagaytay, Cavite",
+            "status": "Available",
+            "createdAt": "2026-11-28T02:13:00.118Z"
+          }
+        }
+      ]
+order: 1000

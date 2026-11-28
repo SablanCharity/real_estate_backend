@@ -1,0 +1,40 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/properties
+request:
+  url: http://localhost:3000/api/v1/properties
+  method: POST
+  body:
+    type: json
+    content: "{\r
+
+      \  \"title\": \"Modern Brick & Stone 2-Storey House in Nuvali\",\r
+
+      \  \"description\": \"4 bedrooms, 3 bathrooms, double-height glass living area, stone perimeter wall, and landscaped garden\",\r
+
+      \  \"price\": 15800000,\r
+
+      \  \"location\": \"Santa Rosa, Laguna\",\r
+
+      \  \"status\": \"Available\"\r
+
+      }"
+response:
+  statusCode: 403
+  statusText: Forbidden
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "95"
+    ETag: W/"5f-oQnQVMK/oMW7DBbpUPqSJooL+q8"
+    Date: Sat, 28 Nov 2026 01:55:32 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      {
+        "message": "Access denied: insufficient role privileges.",
+        "error": "Forbidden",
+        "statusCode": 403
+      }
+order: 2000

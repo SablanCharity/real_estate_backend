@@ -1,0 +1,54 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/viewing-requests/6/logs
+request:
+  url: http://localhost:3000/api/v1/viewing-requests/6/logs
+  method: GET
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "636"
+    ETag: W/"27c-BJyN/t6UC2pW5Z37KwdiXCEGBtw"
+    Date: Fri, 27 Nov 2026 05:08:45 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      [
+        {
+          "logId": 11,
+          "requestId": 6,
+          "updatedBy": 7,
+          "status": "Approved",
+          "remarks": "Schedule confirmed. Agent will meet you at the main gate.",
+          "updatedAt": "2026-11-27T05:05:10.608Z",
+          "updatedByUser": {
+            "userId": 7,
+            "fullName": "Kathryn Bernardo",
+            "email": "kathryn@gmail.com",
+            "role": "Agent",
+            "phone": "09045682347",
+            "createdAt": "2026-11-26T20:44:41.020Z"
+          }
+        },
+        {
+          "logId": 9,
+          "requestId": 6,
+          "updatedBy": 9,
+          "status": "Pending",
+          "remarks": "Viewing request submitted.",
+          "updatedAt": "2026-11-27T04:47:33.476Z",
+          "updatedByUser": {
+            "userId": 9,
+            "fullName": "Herchelle Manzano",
+            "email": "herch@gmail.com",
+            "role": "Customer",
+            "phone": "09102030405",
+            "createdAt": "2026-11-26T21:08:09.450Z"
+          }
+        }
+      ]
+order: 1000

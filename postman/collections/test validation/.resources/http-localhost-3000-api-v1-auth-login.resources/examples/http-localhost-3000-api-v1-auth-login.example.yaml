@@ -1,0 +1,34 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/auth/login
+request:
+  url: http://localhost:3000/api/v1/auth/login
+  method: POST
+  body:
+    type: json
+    content: "{\r
+
+      \    \"email\": \"blemgs@gmail.com\",\r
+
+      \    \"password\": \"Password!\"\r
+
+      }"
+response:
+  statusCode: 401
+  statusText: Unauthorized
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "80"
+    ETag: W/"50-GrMlekmWmbBOHu7ZnTVSDiiqXpM"
+    Date: Fri, 27 Nov 2026 15:22:27 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      {
+        "message": "Invalid email or password.",
+        "error": "Unauthorized",
+        "statusCode": 401
+      }
+order: 1000

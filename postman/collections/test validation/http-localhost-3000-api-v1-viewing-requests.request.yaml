@@ -1,0 +1,22 @@
+$kind: http-request
+name: http://localhost:3000/api/v1/viewing-requests
+description: ""
+url: http://localhost:3000/api/v1/viewing-requests
+method: POST
+body:
+  type: json
+  content: "{\r
+
+    \  \"propertyId\": 10,\r
+
+    \  \"scheduledDate\": \"2026-12-10T10:00:00Z\",\r
+
+    \  \"requestNotes\": \"Morning property tour with family; would like to check the garden and parking area.\"\r
+
+    }"
+auth:
+  type: bearer
+  credentials:
+    token: "{{json_web_token_0au3}}"
+examples: .resources/http-localhost-3000-api-v1-viewing-requests.resources/examples
+order: 25655

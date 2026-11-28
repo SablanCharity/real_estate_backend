@@ -1,0 +1,7 @@
+$kind: http-request
+name: http://localhost:3000/api/v1/properties/6/images
+description: ""
+url: http://localhost:3000/api/v1/properties/6/images
+method: GET
+examples: .resources/http-localhost-3000-api-v1-properties-6-images.resources/examples
+order: 20655
