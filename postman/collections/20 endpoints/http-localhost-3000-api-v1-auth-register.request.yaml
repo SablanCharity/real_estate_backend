@@ -7,13 +7,13 @@ body:
   type: json
   content: "{\r
 
-    \  \"fullName\": \"Herchelle Manzano\",\r
+    \  \"fullName\": \"Kara David\",\r
 
-    \  \"email\": \"herch@gmail.com\",\r
+    \  \"email\": \"kara@gmail.com\",\r
 
     \  \"password\": \"Password123!\",\r
 
-    \  \"phone\": \"09102030405\"\r
+    \  \"phone\": \"09102076543\"\r
 
     }"
 examples: .resources/http-localhost-3000-api-v1-auth-register.resources/examples

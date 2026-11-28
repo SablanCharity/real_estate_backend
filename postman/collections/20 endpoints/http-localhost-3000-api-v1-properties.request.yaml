@@ -7,13 +7,13 @@ body:
   type: json
   content: "{\r
 
-    \  \"title\": \"Modern Zen 2-Storey House in Tagaytay\",\r
+    \  \"title\": \"Modern Mediterranean 2-Storey Villa in Kawit\",\r
 
-    \  \"description\": \"4 bedrooms, 3 bathrooms, open-concept living area, landscaped Zen garden, and dual upstairs balconies\",\r
+    \  \"description\": \"4 bedrooms, 3 bathrooms, arched windows, spacious family lounge, terracotta-tiled balcony, and 2-car garage\",\r
 
-    \  \"price\": 12500000,\r
+    \  \"price\": 11200000,\r
 
-    \  \"location\": \"Tagaytay, Cavite\",\r
+    \  \"location\": \"Kawit, Cavite\",\r
 
     \  \"status\": \"Available\"\r
 
@@ -21,6 +21,6 @@ body:
 auth:
   type: bearer
   credentials:
-    token: "{{json_web_token_0pxx}}"
+    token: "{{json_web_token_10ug}}"
 examples: .resources/http-localhost-3000-api-v1-properties.resources/examples
 order: 3000

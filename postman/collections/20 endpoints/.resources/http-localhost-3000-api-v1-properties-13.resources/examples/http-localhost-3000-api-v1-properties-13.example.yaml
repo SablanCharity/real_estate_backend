@@ -1,0 +1,35 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/properties/13
+request:
+  url: http://localhost:3000/api/v1/properties/13
+  method: GET
+response:
+  statusCode: 200
+  statusText: OK
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "391"
+    ETag: W/"187-zB+ImajBB/OQM1YJrz6xHVz6i28"
+    Date: Sat, 28 Nov 2026 12:29:21 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      {
+        "propertyId": 13,
+        "agentId": 7,
+        "title": "Contemporary Tropical 2-Storey House in Bacoor",
+        "description": "4 bedrooms, 3 bathrooms, sunlit open-plan living and dining area, lanai, landscaped pocket garden, and 2-car garage",
+        "price": "10500000.00",
+        "location": "Bacoor, Cavite",
+        "status": "Available",
+        "createdAt": "2026-11-28T11:05:17.045Z",
+        "agent": {
+          "userId": 7,
+          "fullName": "Kathryn Bernardo"
+        },
+        "images": []
+      }
+order: 2000

@@ -5,6 +5,8 @@ workspace:
 localResources:
   specs:
     - ../postman/specs/endpoints/endpoints.json
+    - ../postman/specs/postman collection - endpoints/postman collection - endpoints.json
 resourceNameMappings:
   specs:
     - ../postman/specs/endpoints/endpoints.json: endpoints
+    - ../postman/specs/postman collection - endpoints/postman collection - endpoints.json: postman collection - endpoints

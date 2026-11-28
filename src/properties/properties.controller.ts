@@ -64,7 +64,6 @@ const propertyImageUploadOptions: MulterOptions = {
 export class PropertiesController {
   constructor(private readonly propertiesService: PropertiesService) {}
 
-  // GET /api/v1/properties (Public)
   @Get()
   async findAll(
     @Query('status') status?: PropertyStatus,
@@ -82,13 +81,11 @@ export class PropertiesController {
     return this.propertiesService.findAll(status, location, parsedMaxPrice);
   }
 
-  // GET /api/v1/properties/:id (Public)
   @Get(':id')
   async findOne(@Param('id', ParseIntPipe) id: number) {
     return this.propertiesService.findOne(id);
   }
 
-  // POST /api/v1/properties (Agent, Admin - supports form-data local image or raw JSON)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(UserRole.AGENT, UserRole.ADMIN)
   @Post()
@@ -114,7 +111,6 @@ export class PropertiesController {
     );
   }
 
-  // PATCH /api/v1/properties/:id (Agent, Admin)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(UserRole.AGENT, UserRole.ADMIN)
   @Patch(':id')
@@ -126,7 +122,6 @@ export class PropertiesController {
     return this.propertiesService.update(id, updatePropertyDto, req.user);
   }
 
-  // DELETE /api/v1/properties/:id (Agent, Admin)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(UserRole.AGENT, UserRole.ADMIN)
   @HttpCode(HttpStatus.NO_CONTENT)
@@ -135,13 +130,11 @@ export class PropertiesController {
     return this.propertiesService.remove(id, req.user);
   }
 
-  // GET /api/v1/properties/:id/images (Public)
   @Get(':id/images')
   async findImages(@Param('id', ParseIntPipe) id: number) {
     return this.propertiesService.findImages(id);
   }
 
-  // POST /api/v1/properties/:id/images (Agent, Admin - supports form-data local image or raw JSON)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(UserRole.AGENT, UserRole.ADMIN)
   @Post(':id/images')
@@ -169,7 +162,6 @@ export class PropertiesController {
     );
   }
 
-  // DELETE /api/v1/properties/:id/images/:imageId (Agent, Admin)
   @UseGuards(JwtAuthGuard, RolesGuard)
   @Roles(UserRole.AGENT, UserRole.ADMIN)
   @HttpCode(HttpStatus.NO_CONTENT)

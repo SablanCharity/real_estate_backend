@@ -1,0 +1,50 @@
+$kind: http-example
+name: http://localhost:3000/api/v1/properties
+request:
+  url: http://localhost:3000/api/v1/properties
+  method: POST
+  body:
+    type: json
+    content: "{\r
+
+      \  \"title\": \"Modern Mediterranean 2-Storey Villa in Kawit\",\r
+
+      \  \"description\": \"4 bedrooms, 3 bathrooms, arched windows, spacious family lounge, terracotta-tiled balcony, and 2-car garage\",\r
+
+      \  \"price\": 11200000,\r
+
+      \  \"location\": \"Kawit, Cavite\",\r
+
+      \  \"status\": \"Available\"\r
+
+      }"
+response:
+  statusCode: 201
+  statusText: Created
+  headers:
+    X-Powered-By: Express
+    Content-Type: application/json; charset=utf-8
+    Content-Length: "380"
+    ETag: W/"17c-4yQ4QNvagDtoUq+j5WzNjv0h1Vw"
+    Date: Sat, 28 Nov 2026 12:28:04 GMT
+    Connection: keep-alive
+    Keep-Alive: timeout=5
+  body:
+    type: json
+    content: |-
+      {
+        "propertyId": 17,
+        "agentId": 7,
+        "title": "Modern Mediterranean 2-Storey Villa in Kawit",
+        "description": "4 bedrooms, 3 bathrooms, arched windows, spacious family lounge, terracotta-tiled balcony, and 2-car garage",
+        "price": "11200000.00",
+        "location": "Kawit, Cavite",
+        "status": "Available",
+        "createdAt": "2026-11-28T12:28:04.785Z",
+        "agent": {
+          "userId": 7,
+          "fullName": "Kathryn Bernardo"
+        },
+        "images": []
+      }
+order: 2000

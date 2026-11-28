@@ -1,0 +1,2499 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "postman collection - endpoints",
+    "version": "1.0.0",
+    "description": ""
+  },
+  "servers": [
+    {
+      "url": "http://localhost:3000"
+    }
+  ],
+  "paths": {
+    "/api/v1/auth/register": {
+      "post": {
+        "summary": "http://localhost:3000/api/v1/auth/register",
+        "responses": {
+          "201": {
+            "description": "http://localhost:3000/api/v1/auth/register",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer"
+                },
+                "example": 141
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"8d-EPoM7dc/0SeLkvEceApyHKHrcmg\""
+              },
+              "Date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Sat, 28 Nov 2026 12:24:49 GMT"
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "keep-alive"
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "timeout=5"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "userId": {
+                      "type": "integer"
+                    },
+                    "fullName": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "role": {
+                      "type": "string"
+                    },
+                    "phone": {
+                      "type": "string",
+                      "format": "utc-millisec"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                },
+                "example": {
+                  "userId": 12,
+                  "fullName": "Kara David",
+                  "email": "kara@gmail.com",
+                  "role": "Customer",
+                  "phone": "09102076543",
+                  "createdAt": "2026-11-28T12:24:49.586Z"
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "fullName": {
+                    "type": "string"
+                  },
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "format": "utc-millisec"
+                  }
+                }
+              },
+              "example": {
+                "fullName": "Kara David",
+                "email": "kara@gmail.com",
+                "password": "Password123!",
+                "phone": "09102076543"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/auth/login": {
+      "post": {
+        "summary": "http://localhost:3000/api/v1/auth/login",
+        "responses": {
+          "200": {
+            "description": "http://localhost:3000/api/v1/auth/login",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer"
+                },
+                "example": 303
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"12f-N17vCCIUlEoQcgPY8UUZtWQfyB4\""
+              },
+              "Date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Sat, 28 Nov 2026 12:25:26 GMT"
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "keep-alive"
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "timeout=5"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "accessToken": {
+                      "type": "string"
+                    },
+                    "user": {
+                      "type": "object",
+                      "properties": {
+                        "userId": {
+                          "type": "integer"
+                        },
+                        "fullName": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string",
+                          "format": "email"
+                        },
+                        "role": {
+                          "type": "string"
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "accessToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEyLCJlbWFpbCI6ImthcmFAZ21haWwuY29tIiwicm9sZSI6IkN1c3RvbWVyIiwiaWF0IjoxNzk1ODY4NzI2LCJleHAiOjE3OTU5NTUxMjZ9._hnlQrXDDaXKWy9vNsWBpVXXGAqTA5QqCNtdX2yHsaQ",
+                  "user": {
+                    "userId": 12,
+                    "fullName": "Kara David",
+                    "email": "kara@gmail.com",
+                    "role": "Customer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "password": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "email": "kara@gmail.com",
+                "password": "Password123!"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/properties": {
+      "post": {
+        "summary": "http://localhost:3000/api/v1/properties",
+        "responses": {
+          "201": {
+            "description": "http://localhost:3000/api/v1/properties",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer"
+                },
+                "example": 380
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"17c-4yQ4QNvagDtoUq+j5WzNjv0h1Vw\""
+              },
+              "Date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Sat, 28 Nov 2026 12:28:04 GMT"
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "keep-alive"
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "timeout=5"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "propertyId": {
+                      "type": "integer"
+                    },
+                    "agentId": {
+                      "type": "integer"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "price": {
+                      "type": "string",
+                      "format": "utc-millisec"
+                    },
+                    "location": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "agent": {
+                      "type": "object",
+                      "properties": {
+                        "userId": {
+                          "type": "integer"
+                        },
+                        "fullName": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "images": {
+                      "type": "array"
+                    }
+                  }
+                },
+                "example": {
+                  "propertyId": 17,
+                  "agentId": 7,
+                  "title": "Modern Mediterranean 2-Storey Villa in Kawit",
+                  "description": "4 bedrooms, 3 bathrooms, arched windows, spacious family lounge, terracotta-tiled balcony, and 2-car garage",
+                  "price": "11200000.00",
+                  "location": "Kawit, Cavite",
+                  "status": "Available",
+                  "createdAt": "2026-11-28T12:28:04.785Z",
+                  "agent": {
+                    "userId": 7,
+                    "fullName": "Kathryn Bernardo"
+                  },
+                  "images": []
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "title": {
+                    "type": "string"
+                  },
+                  "description": {
+                    "type": "string"
+                  },
+                  "price": {
+                    "type": "integer"
+                  },
+                  "location": {
+                    "type": "string"
+                  },
+                  "status": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "title": "Modern Mediterranean 2-Storey Villa in Kawit",
+                "description": "4 bedrooms, 3 bathrooms, arched windows, spacious family lounge, terracotta-tiled balcony, and 2-car garage",
+                "price": 11200000,
+                "location": "Kawit, Cavite",
+                "status": "Available"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "http://localhost:3000/api/v1/properties",
+        "parameters": [
+          {
+            "name": "maxPrice",
+            "in": "query",
+            "schema": {
+              "type": "integer"
+            },
+            "example": 10000000
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "http://localhost:3000/api/v1/properties",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer"
+                },
+                "example": 1789
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"6fd-TySplatn3584HZIDuI7FFSRvmm4\""
+              },
+              "Date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Sat, 28 Nov 2026 12:28:36 GMT"
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "keep-alive"
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "timeout=5"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "propertyId": {
+                        "type": "integer"
+                      },
+                      "agentId": {
+                        "type": "integer"
+                      },
+                      "title": {
+                        "type": "string"
+                      },
+                      "description": {
+                        "type": "string"
+                      },
+                      "price": {
+                        "type": "string",
+                        "format": "utc-millisec"
+                      },
+                      "location": {
+                        "type": "string"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "agent": {
+                        "type": "object",
+                        "properties": {
+                          "userId": {
+                            "type": "integer"
+                          },
+                          "fullName": {
+                            "type": "string"
+                          }
+                        }
+                      },
+                      "images": {
+                        "type": "array"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "propertyId": 4,
+                    "agentId": 5,
+                    "title": "Modern 2-Storey House in Imus",
+                    "description": "Updated price: 3 bedrooms, 2 bathrooms near commercial hub",
+                    "price": "6200000.00",
+                    "location": "Imus, Cavite",
+                    "status": "Available",
+                    "createdAt": "2026-11-26T14:17:50.513Z",
+                    "agent": {
+                      "userId": 5,
+                      "fullName": "Gehlee Dangca"
+                    },
+                    "images": []
+                  },
+                  {
+                    "propertyId": 6,
+                    "agentId": 7,
+                    "title": "Modern Zen 2-Storey House in Tagaytay",
+                    "description": "4 bedrooms, 3 bathrooms, open-concept living area, landscaped Zen garden, and dual upstairs balconies",
+                    "price": "10000000.00",
+                    "location": "Tagaytay, Cavite",
+                    "status": "Available",
+                    "createdAt": "2026-11-26T21:23:13.416Z",
+                    "agent": {
+                      "userId": 7,
+                      "fullName": "Kathryn Bernardo"
+                    },
+                    "images": [
+                      {
+                        "imageId": 6,
+                        "propertyId": 6,
+                        "imageUrl": "http://localhost:3000/uploads/properties/property-1795730859335-305408112.jpg",
+                        "uploadedAt": "2026-11-26T22:07:39.355Z"
+                      }
+                    ]
+                  },
+                  {
+                    "propertyId": 11,
+                    "agentId": 7,
+                    "title": "Modern Minimalist 2-Storey Townhouse in Dasmariñas",
+                    "description": "3 bedrooms, 2 bathrooms, open-concept living and dining area, granite kitchen countertop, balcony, and 1-car garage",
+                    "price": "5200000.00",
+                    "location": "Dasmariñas, Cavite",
+                    "status": "Available",
+                    "createdAt": "2026-11-28T10:49:57.065Z",
+                    "agent": {
+                      "userId": 7,
+                      "fullName": "Kathryn Bernardo"
+                    },
+                    "images": []
+                  },
+                  {
+                    "propertyId": 12,
+                    "agentId": 7,
+                    "title": "Modern Industrial House",
+                    "description": "3 bedrooms, 2 bathrooms",
+                    "price": "4500000.00",
+                    "location": "Alfonso, Cavite",
+                    "status": "Available",
+                    "createdAt": "2026-11-28T10:51:04.323Z",
+                    "agent": {
+                      "userId": 7,
+                      "fullName": "Kathryn Bernardo"
+                    },
+                    "images": []
+                  },
+                  {
+                    "propertyId": 16,
+                    "agentId": 7,
+                    "title": "Modern Scandinavian",
+                    "description": "3 bedrooms, 2 bathrooms",
+                    "price": "4500000.00",
+                    "location": "Imus, Cavite",
+                    "status": "Available",
+                    "createdAt": "2026-11-28T11:15:14.645Z",
+                    "agent": {
+                      "userId": 7,
+                      "fullName": "Kathryn Bernardo"
+                    },
+                    "images": []
+                  }
+                ]
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/properties/13": {
+      "get": {
+        "summary": "http://localhost:3000/api/v1/properties/13",
+        "responses": {
+          "200": {
+            "description": "http://localhost:3000/api/v1/properties/13",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer"
+                },
+                "example": 391
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"187-zB+ImajBB/OQM1YJrz6xHVz6i28\""
+              },
+              "Date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Sat, 28 Nov 2026 12:29:21 GMT"
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "keep-alive"
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "timeout=5"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "propertyId": {
+                      "type": "integer"
+                    },
+                    "agentId": {
+                      "type": "integer"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "price": {
+                      "type": "string",
+                      "format": "utc-millisec"
+                    },
+                    "location": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "agent": {
+                      "type": "object",
+                      "properties": {
+                        "userId": {
+                          "type": "integer"
+                        },
+                        "fullName": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "images": {
+                      "type": "array"
+                    }
+                  }
+                },
+                "example": {
+                  "propertyId": 13,
+                  "agentId": 7,
+                  "title": "Contemporary Tropical 2-Storey House in Bacoor",
+                  "description": "4 bedrooms, 3 bathrooms, sunlit open-plan living and dining area, lanai, landscaped pocket garden, and 2-car garage",
+                  "price": "10500000.00",
+                  "location": "Bacoor, Cavite",
+                  "status": "Available",
+                  "createdAt": "2026-11-28T11:05:17.045Z",
+                  "agent": {
+                    "userId": 7,
+                    "fullName": "Kathryn Bernardo"
+                  },
+                  "images": []
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/properties/17": {
+      "patch": {
+        "summary": "http://localhost:3000/api/v1/properties/17",
+        "responses": {
+          "200": {
+            "description": "http://localhost:3000/api/v1/properties/13",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer"
+                },
+                "example": 375
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"177-QNcGnVb0jFmXWH0qU5yDET6Zg5w\""
+              },
+              "Date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Sat, 28 Nov 2026 12:32:57 GMT"
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "keep-alive"
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "timeout=5"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "propertyId": {
+                      "type": "integer"
+                    },
+                    "agentId": {
+                      "type": "integer"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "price": {
+                      "type": "integer"
+                    },
+                    "location": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "agent": {
+                      "type": "object",
+                      "properties": {
+                        "userId": {
+                          "type": "integer"
+                        },
+                        "fullName": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "images": {
+                      "type": "array"
+                    }
+                  }
+                },
+                "example": {
+                  "propertyId": 17,
+                  "agentId": 7,
+                  "title": "Modern Mediterranean 2-Storey Villa in Kawit",
+                  "description": "4 bedrooms, 3 bathrooms, arched windows, spacious family lounge, terracotta-tiled balcony, and 2-car garage",
+                  "price": 35000000,
+                  "location": "Kawit, Cavite",
+                  "status": "Available",
+                  "createdAt": "2026-11-28T12:28:04.785Z",
+                  "agent": {
+                    "userId": 7,
+                    "fullName": "Kathryn Bernardo"
+                  },
+                  "images": []
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "price": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "example": {
+                "price": 35000000
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/properties/6/images": {
+      "post": {
+        "summary": "http://localhost:3000/api/v1/properties/6/images",
+        "responses": {
+          "201": {
+            "description": "http://localhost:3000/api/v1/properties/6/images",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer"
+                },
+                "example": 321
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"141-RDUZe1qnfIQCwYpwibvA0xT7+d4\""
+              },
+              "Date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Thu, 26 Nov 2026 22:07:39 GMT"
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "keep-alive"
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "timeout=5"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "imageId": {
+                        "type": "integer"
+                      },
+                      "propertyId": {
+                        "type": "integer"
+                      },
+                      "imageUrl": {
+                        "type": "string",
+                        "format": "uri"
+                      },
+                      "uploadedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "imageId": 6,
+                    "propertyId": 6,
+                    "imageUrl": "http://localhost:3000/uploads/properties/property-1795730859335-305408112.jpg",
+                    "uploadedAt": "2026-11-26T22:07:39.355Z"
+                  },
+                  {
+                    "imageId": 7,
+                    "propertyId": 6,
+                    "imageUrl": "http://localhost:3000/uploads/properties/property-1795730859340-305336977.jpg",
+                    "uploadedAt": "2026-11-26T22:07:39.359Z"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/properties/6": {
+      "get": {
+        "summary": "http://localhost:3000/api/v1/properties/6",
+        "responses": {
+          "200": {
+            "description": "http://localhost:3000/api/v1/properties/6",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer"
+                },
+                "example": 688
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"2b0-SnBWOy+rZ6VWNN8LvM8k24GS1sA\""
+              },
+              "Date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Thu, 26 Nov 2026 22:10:18 GMT"
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "keep-alive"
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "timeout=5"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "propertyId": {
+                      "type": "integer"
+                    },
+                    "agentId": {
+                      "type": "integer"
+                    },
+                    "title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    },
+                    "price": {
+                      "type": "string",
+                      "format": "utc-millisec"
+                    },
+                    "location": {
+                      "type": "string"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "agent": {
+                      "type": "object",
+                      "properties": {
+                        "userId": {
+                          "type": "integer"
+                        },
+                        "fullName": {
+                          "type": "string"
+                        }
+                      }
+                    },
+                    "images": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "imageId": {
+                            "type": "integer"
+                          },
+                          "propertyId": {
+                            "type": "integer"
+                          },
+                          "imageUrl": {
+                            "type": "string",
+                            "format": "uri"
+                          },
+                          "uploadedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "propertyId": 6,
+                  "agentId": 7,
+                  "title": "Modern Zen 2-Storey House in Tagaytay",
+                  "description": "4 bedrooms, 3 bathrooms, open-concept living area, landscaped Zen garden, and dual upstairs balconies",
+                  "price": "10000000.00",
+                  "location": "Tagaytay, Cavite",
+                  "status": "Available",
+                  "createdAt": "2026-11-26T21:23:13.416Z",
+                  "agent": {
+                    "userId": 7,
+                    "fullName": "Kathryn Bernardo"
+                  },
+                  "images": [
+                    {
+                      "imageId": 6,
+                      "propertyId": 6,
+                      "imageUrl": "http://localhost:3000/uploads/properties/property-1795730859335-305408112.jpg",
+                      "uploadedAt": "2026-11-26T22:07:39.355Z"
+                    },
+                    {
+                      "imageId": 7,
+                      "propertyId": 6,
+                      "imageUrl": "http://localhost:3000/uploads/properties/property-1795730859340-305336977.jpg",
+                      "uploadedAt": "2026-11-26T22:07:39.359Z"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/viewing-requests": {
+      "post": {
+        "summary": "http://localhost:3000/api/v1/viewing-requests",
+        "responses": {
+          "201": {
+            "description": "http://localhost:3000/api/v1/viewing-requests",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer"
+                },
+                "example": 179
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"b3-zX7y5y3UfpEdr4ddLgrRKfwv6Hw\""
+              },
+              "Date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Fri, 27 Nov 2026 04:47:33 GMT"
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "keep-alive"
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "timeout=5"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "requestId": {
+                      "type": "integer"
+                    },
+                    "customerId": {
+                      "type": "integer"
+                    },
+                    "propertyId": {
+                      "type": "integer"
+                    },
+                    "scheduledDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "requestNotes": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                },
+                "example": {
+                  "requestId": 6,
+                  "customerId": 9,
+                  "propertyId": 6,
+                  "scheduledDate": "2026-12-05T10:00:00.000Z",
+                  "status": "Pending",
+                  "requestNotes": "Morning Viewing",
+                  "createdAt": "2026-11-27T04:47:33.467Z"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "propertyId": {
+                    "type": "integer"
+                  },
+                  "scheduledDate": {
+                    "type": "string",
+                    "format": "date-time"
+                  },
+                  "requestNotes": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "propertyId": 6,
+                "scheduledDate": "2026-12-05T10:00:00Z",
+                "requestNotes": "Morning Viewing"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "http://localhost:3000/api/v1/viewing-requests",
+        "responses": {
+          "200": {
+            "description": "http://localhost:3000/api/v1/viewing-requests",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer"
+                },
+                "example": 1325
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"52d-eo2V/h2OVBqgG4AOW09Fr4NIgHg\""
+              },
+              "Date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Fri, 27 Nov 2026 04:57:46 GMT"
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "keep-alive"
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "timeout=5"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "requestId": {
+                        "type": "integer"
+                      },
+                      "customerId": {
+                        "type": "integer"
+                      },
+                      "propertyId": {
+                        "type": "integer"
+                      },
+                      "scheduledDate": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "requestNotes": {
+                        "type": "string"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "customer": {
+                        "type": "object",
+                        "properties": {
+                          "userId": {
+                            "type": "integer"
+                          },
+                          "fullName": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string",
+                            "format": "email"
+                          },
+                          "role": {
+                            "type": "string"
+                          },
+                          "phone": {
+                            "type": "string",
+                            "format": "utc-millisec"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      },
+                      "property": {
+                        "type": "object",
+                        "properties": {
+                          "propertyId": {
+                            "type": "integer"
+                          },
+                          "agentId": {
+                            "type": "integer"
+                          },
+                          "title": {
+                            "type": "string"
+                          },
+                          "description": {
+                            "type": "string"
+                          },
+                          "price": {
+                            "type": "string",
+                            "format": "utc-millisec"
+                          },
+                          "location": {
+                            "type": "string"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "requestId": 6,
+                    "customerId": 9,
+                    "propertyId": 6,
+                    "scheduledDate": "2026-12-05T10:00:00.000Z",
+                    "status": "Pending",
+                    "requestNotes": "Morning Viewing",
+                    "createdAt": "2026-11-27T04:47:33.467Z",
+                    "customer": {
+                      "userId": 9,
+                      "fullName": "Herchelle Manzano",
+                      "email": "herch@gmail.com",
+                      "role": "Customer",
+                      "phone": "09102030405",
+                      "createdAt": "2026-11-26T21:08:09.450Z"
+                    },
+                    "property": {
+                      "propertyId": 6,
+                      "agentId": 7,
+                      "title": "Modern Zen 2-Storey House in Tagaytay",
+                      "description": "4 bedrooms, 3 bathrooms, open-concept living area, landscaped Zen garden, and dual upstairs balconies",
+                      "price": "10000000.00",
+                      "location": "Tagaytay, Cavite",
+                      "status": "Available",
+                      "createdAt": "2026-11-26T21:23:13.416Z"
+                    }
+                  },
+                  {
+                    "requestId": 7,
+                    "customerId": 8,
+                    "propertyId": 6,
+                    "scheduledDate": "2026-12-05T14:00:00.000Z",
+                    "status": "Pending",
+                    "requestNotes": "Saturday afternoon viewing",
+                    "createdAt": "2026-11-27T04:57:34.282Z",
+                    "customer": {
+                      "userId": 8,
+                      "fullName": "Nadine Lustre",
+                      "email": "Nadine@gmail.com",
+                      "role": "Customer",
+                      "phone": "09846273828",
+                      "createdAt": "2026-11-26T20:47:24.553Z"
+                    },
+                    "property": {
+                      "propertyId": 6,
+                      "agentId": 7,
+                      "title": "Modern Zen 2-Storey House in Tagaytay",
+                      "description": "4 bedrooms, 3 bathrooms, open-concept living area, landscaped Zen garden, and dual upstairs balconies",
+                      "price": "10000000.00",
+                      "location": "Tagaytay, Cavite",
+                      "status": "Available",
+                      "createdAt": "2026-11-26T21:23:13.416Z"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/viewing-requests/6": {
+      "get": {
+        "summary": "http://localhost:3000/api/v1/viewing-requests/6",
+        "responses": {
+          "200": {
+            "description": "http://localhost:3000/api/v1/viewing-requests/6",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer"
+                },
+                "example": 803
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"323-pebu1Xh+bg3y1p37MMuPki0oYc0\""
+              },
+              "Date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Fri, 27 Nov 2026 04:59:10 GMT"
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "keep-alive"
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "timeout=5"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "requestId": {
+                      "type": "integer"
+                    },
+                    "customerId": {
+                      "type": "integer"
+                    },
+                    "propertyId": {
+                      "type": "integer"
+                    },
+                    "scheduledDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "requestNotes": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "customer": {
+                      "type": "object",
+                      "properties": {
+                        "userId": {
+                          "type": "integer"
+                        },
+                        "fullName": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string",
+                          "format": "email"
+                        },
+                        "role": {
+                          "type": "string"
+                        },
+                        "phone": {
+                          "type": "string",
+                          "format": "utc-millisec"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    },
+                    "property": {
+                      "type": "object",
+                      "properties": {
+                        "propertyId": {
+                          "type": "integer"
+                        },
+                        "agentId": {
+                          "type": "integer"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "price": {
+                          "type": "string",
+                          "format": "utc-millisec"
+                        },
+                        "location": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    },
+                    "logs": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "logId": {
+                            "type": "integer"
+                          },
+                          "requestId": {
+                            "type": "integer"
+                          },
+                          "updatedBy": {
+                            "type": "integer"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "remarks": {
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "requestId": 6,
+                  "customerId": 9,
+                  "propertyId": 6,
+                  "scheduledDate": "2026-12-05T10:00:00.000Z",
+                  "status": "Pending",
+                  "requestNotes": "Morning Viewing",
+                  "createdAt": "2026-11-27T04:47:33.467Z",
+                  "customer": {
+                    "userId": 9,
+                    "fullName": "Herchelle Manzano",
+                    "email": "herch@gmail.com",
+                    "role": "Customer",
+                    "phone": "09102030405",
+                    "createdAt": "2026-11-26T21:08:09.450Z"
+                  },
+                  "property": {
+                    "propertyId": 6,
+                    "agentId": 7,
+                    "title": "Modern Zen 2-Storey House in Tagaytay",
+                    "description": "4 bedrooms, 3 bathrooms, open-concept living area, landscaped Zen garden, and dual upstairs balconies",
+                    "price": "10000000.00",
+                    "location": "Tagaytay, Cavite",
+                    "status": "Available",
+                    "createdAt": "2026-11-26T21:23:13.416Z"
+                  },
+                  "logs": [
+                    {
+                      "logId": 9,
+                      "requestId": 6,
+                      "updatedBy": 9,
+                      "status": "Pending",
+                      "remarks": "Viewing request submitted.",
+                      "updatedAt": "2026-11-27T04:47:33.476Z"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      },
+      "patch": {
+        "summary": "http://localhost:3000/api/v1/viewing-requests/6",
+        "responses": {
+          "200": {
+            "description": "http://localhost:3000/api/v1/viewing-requests/6",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer"
+                },
+                "example": 804
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"324-qqCaAhJGj7R36lyBIF3JkxZE4oE\""
+              },
+              "Date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Fri, 27 Nov 2026 05:05:10 GMT"
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "keep-alive"
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "timeout=5"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "requestId": {
+                      "type": "integer"
+                    },
+                    "customerId": {
+                      "type": "integer"
+                    },
+                    "propertyId": {
+                      "type": "integer"
+                    },
+                    "scheduledDate": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "status": {
+                      "type": "string"
+                    },
+                    "requestNotes": {
+                      "type": "string"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    },
+                    "customer": {
+                      "type": "object",
+                      "properties": {
+                        "userId": {
+                          "type": "integer"
+                        },
+                        "fullName": {
+                          "type": "string"
+                        },
+                        "email": {
+                          "type": "string",
+                          "format": "email"
+                        },
+                        "role": {
+                          "type": "string"
+                        },
+                        "phone": {
+                          "type": "string",
+                          "format": "utc-millisec"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    },
+                    "property": {
+                      "type": "object",
+                      "properties": {
+                        "propertyId": {
+                          "type": "integer"
+                        },
+                        "agentId": {
+                          "type": "integer"
+                        },
+                        "title": {
+                          "type": "string"
+                        },
+                        "description": {
+                          "type": "string"
+                        },
+                        "price": {
+                          "type": "string",
+                          "format": "utc-millisec"
+                        },
+                        "location": {
+                          "type": "string"
+                        },
+                        "status": {
+                          "type": "string"
+                        },
+                        "createdAt": {
+                          "type": "string",
+                          "format": "date-time"
+                        }
+                      }
+                    },
+                    "logs": {
+                      "type": "array",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "logId": {
+                            "type": "integer"
+                          },
+                          "requestId": {
+                            "type": "integer"
+                          },
+                          "updatedBy": {
+                            "type": "integer"
+                          },
+                          "status": {
+                            "type": "string"
+                          },
+                          "remarks": {
+                            "type": "string"
+                          },
+                          "updatedAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "requestId": 6,
+                  "customerId": 9,
+                  "propertyId": 6,
+                  "scheduledDate": "2026-12-05T10:00:00.000Z",
+                  "status": "Approved",
+                  "requestNotes": "Morning Viewing",
+                  "createdAt": "2026-11-27T04:47:33.467Z",
+                  "customer": {
+                    "userId": 9,
+                    "fullName": "Herchelle Manzano",
+                    "email": "herch@gmail.com",
+                    "role": "Customer",
+                    "phone": "09102030405",
+                    "createdAt": "2026-11-26T21:08:09.450Z"
+                  },
+                  "property": {
+                    "propertyId": 6,
+                    "agentId": 7,
+                    "title": "Modern Zen 2-Storey House in Tagaytay",
+                    "description": "4 bedrooms, 3 bathrooms, open-concept living area, landscaped Zen garden, and dual upstairs balconies",
+                    "price": "10000000.00",
+                    "location": "Tagaytay, Cavite",
+                    "status": "Available",
+                    "createdAt": "2026-11-26T21:23:13.416Z"
+                  },
+                  "logs": [
+                    {
+                      "logId": 9,
+                      "requestId": 6,
+                      "updatedBy": 9,
+                      "status": "Pending",
+                      "remarks": "Viewing request submitted.",
+                      "updatedAt": "2026-11-27T04:47:33.476Z"
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string"
+                  },
+                  "remarks": {
+                    "type": "string"
+                  }
+                }
+              },
+              "example": {
+                "status": "Approved",
+                "remarks": "Schedule confirmed. Agent will meet you at the main gate."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/viewing-requests/6/logs": {
+      "get": {
+        "summary": "http://localhost:3000/api/v1/viewing-requests/6/logs",
+        "responses": {
+          "200": {
+            "description": "http://localhost:3000/api/v1/viewing-requests/6/logs",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer"
+                },
+                "example": 636
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"27c-BJyN/t6UC2pW5Z37KwdiXCEGBtw\""
+              },
+              "Date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Fri, 27 Nov 2026 05:08:45 GMT"
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "keep-alive"
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "timeout=5"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "logId": {
+                        "type": "integer"
+                      },
+                      "requestId": {
+                        "type": "integer"
+                      },
+                      "updatedBy": {
+                        "type": "integer"
+                      },
+                      "status": {
+                        "type": "string"
+                      },
+                      "remarks": {
+                        "type": "string"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "format": "date-time"
+                      },
+                      "updatedByUser": {
+                        "type": "object",
+                        "properties": {
+                          "userId": {
+                            "type": "integer"
+                          },
+                          "fullName": {
+                            "type": "string"
+                          },
+                          "email": {
+                            "type": "string",
+                            "format": "email"
+                          },
+                          "role": {
+                            "type": "string"
+                          },
+                          "phone": {
+                            "type": "string",
+                            "format": "utc-millisec"
+                          },
+                          "createdAt": {
+                            "type": "string",
+                            "format": "date-time"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "logId": 11,
+                    "requestId": 6,
+                    "updatedBy": 7,
+                    "status": "Approved",
+                    "remarks": "Schedule confirmed. Agent will meet you at the main gate.",
+                    "updatedAt": "2026-11-27T05:05:10.608Z",
+                    "updatedByUser": {
+                      "userId": 7,
+                      "fullName": "Kathryn Bernardo",
+                      "email": "kathryn@gmail.com",
+                      "role": "Agent",
+                      "phone": "09045682347",
+                      "createdAt": "2026-11-26T20:44:41.020Z"
+                    }
+                  },
+                  {
+                    "logId": 9,
+                    "requestId": 6,
+                    "updatedBy": 9,
+                    "status": "Pending",
+                    "remarks": "Viewing request submitted.",
+                    "updatedAt": "2026-11-27T04:47:33.476Z",
+                    "updatedByUser": {
+                      "userId": 9,
+                      "fullName": "Herchelle Manzano",
+                      "email": "herch@gmail.com",
+                      "role": "Customer",
+                      "phone": "09102030405",
+                      "createdAt": "2026-11-26T21:08:09.450Z"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/viewing-requests/4": {
+      "delete": {
+        "summary": "http://localhost:3000/api/v1/viewing-requests/4",
+        "responses": {
+          "204": {
+            "description": "http://localhost:3000/api/v1/viewing-requests/4",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"33-881oYsRUxZ/SwVeL1+hgi/UAz0U\""
+              },
+              "Date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Fri, 27 Nov 2026 05:11:30 GMT"
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "keep-alive"
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "timeout=5"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users": {
+      "get": {
+        "summary": "http://localhost:3000/api/v1/users",
+        "responses": {
+          "200": {
+            "description": "http://localhost:3000/api/v1/users",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer"
+                },
+                "example": 1190
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"4a6-EVVQZHSFI8A9fv6C3hVBvdK8+Bo\""
+              },
+              "Date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Fri, 27 Nov 2026 05:14:44 GMT"
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "keep-alive"
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "timeout=5"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "userId": {
+                        "type": "integer"
+                      },
+                      "fullName": {
+                        "type": "string"
+                      },
+                      "email": {
+                        "type": "string",
+                        "format": "email"
+                      },
+                      "role": {
+                        "type": "string"
+                      },
+                      "phone": {
+                        "type": "string",
+                        "format": "utc-millisec"
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "format": "date-time"
+                      }
+                    }
+                  }
+                },
+                "example": [
+                  {
+                    "userId": 1,
+                    "fullName": "System Admin",
+                    "email": "admin@gmail.com",
+                    "role": "Admin",
+                    "phone": "09865486366",
+                    "createdAt": "2026-10-23T07:28:23.948Z"
+                  },
+                  {
+                    "userId": 2,
+                    "fullName": "Sanya Lopez",
+                    "email": "sanya@encatadia.com",
+                    "role": "Agent",
+                    "phone": "+639987654321",
+                    "createdAt": "2026-10-23T09:46:47.376Z"
+                  },
+                  {
+                    "userId": 3,
+                    "fullName": "Olivia Rodriguez",
+                    "email": "sablan.charity101005@gmail.com",
+                    "role": "Customer",
+                    "phone": "09875671926",
+                    "createdAt": "2026-11-23T06:10:31.784Z"
+                  },
+                  {
+                    "userId": 4,
+                    "fullName": "Charity Sablan",
+                    "email": "sablancharity0@gmail.com",
+                    "role": "Admin",
+                    "phone": "+639123456789",
+                    "createdAt": "2026-11-23T06:24:35.280Z"
+                  },
+                  {
+                    "userId": 5,
+                    "fullName": "Gehlee Dangca",
+                    "email": "gehlee@gmail.com",
+                    "role": "Agent",
+                    "phone": "09171234567",
+                    "createdAt": "2026-11-26T07:56:46.045Z"
+                  },
+                  {
+                    "userId": 7,
+                    "fullName": "Kathryn Bernardo",
+                    "email": "kathryn@gmail.com",
+                    "role": "Agent",
+                    "phone": "09045682347",
+                    "createdAt": "2026-11-26T20:44:41.020Z"
+                  },
+                  {
+                    "userId": 8,
+                    "fullName": "Nadine Lustre",
+                    "email": "Nadine@gmail.com",
+                    "role": "Customer",
+                    "phone": "09846273828",
+                    "createdAt": "2026-11-26T20:47:24.553Z"
+                  },
+                  {
+                    "userId": 9,
+                    "fullName": "Herchelle Manzano",
+                    "email": "herch@gmail.com",
+                    "role": "Customer",
+                    "phone": "09102030405",
+                    "createdAt": "2026-11-26T21:08:09.450Z"
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/8": {
+      "get": {
+        "summary": "http://localhost:3000/api/v1/users/8",
+        "responses": {
+          "200": {
+            "description": "http://localhost:3000/api/v1/users/8",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer"
+                },
+                "example": 145
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"91-Nr7cj8gQ4b54M/zgp9SAVySNte4\""
+              },
+              "Date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Fri, 27 Nov 2026 05:16:16 GMT"
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "keep-alive"
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "timeout=5"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "userId": {
+                      "type": "integer"
+                    },
+                    "fullName": {
+                      "type": "string"
+                    },
+                    "email": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "role": {
+                      "type": "string"
+                    },
+                    "phone": {
+                      "type": "string",
+                      "format": "utc-millisec"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                },
+                "example": {
+                  "userId": 8,
+                  "fullName": "Nadine Lustre",
+                  "email": "Nadine@gmail.com",
+                  "role": "Customer",
+                  "phone": "09846273828",
+                  "createdAt": "2026-11-26T20:47:24.553Z"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/users/9": {
+      "patch": {
+        "summary": "http://localhost:3000/api/v1/users/9",
+        "responses": {
+          "200": {
+            "description": "http://localhost:3000/api/v1/users/9",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "Content-Length": {
+                "schema": {
+                  "type": "integer"
+                },
+                "example": 99
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"63-7zJkNtmxp9PEBNlwazzruhtZPvU\""
+              },
+              "Date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Fri, 27 Nov 2026 05:24:55 GMT"
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "keep-alive"
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "timeout=5"
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "userId": {
+                      "type": "integer"
+                    },
+                    "email": {
+                      "type": "string",
+                      "format": "email"
+                    },
+                    "phone": {
+                      "type": "string",
+                      "format": "utc-millisec"
+                    },
+                    "createdAt": {
+                      "type": "string",
+                      "format": "date-time"
+                    }
+                  }
+                },
+                "example": {
+                  "userId": 9,
+                  "email": "herch@gmail.com",
+                  "phone": "09985337777",
+                  "createdAt": "2026-11-26T21:08:09.450Z"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "phone": {
+                    "type": "string",
+                    "format": "utc-millisec"
+                  }
+                }
+              },
+              "example": {
+                "phone": "09985337777"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/v1/users/2": {
+      "delete": {
+        "summary": "http://localhost:3000/api/v1/users/2",
+        "responses": {
+          "204": {
+            "description": "http://localhost:3000/api/v1/users/2",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"2b-uFU4adoWsF2nGJtQcjfHc/C7xuY\""
+              },
+              "Date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Fri, 27 Nov 2026 05:27:43 GMT"
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "keep-alive"
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "timeout=5"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/properties/10/images/9": {
+      "delete": {
+        "summary": "http://localhost:3000/api/v1/properties/10/images/9",
+        "responses": {
+          "204": {
+            "description": "http://localhost:3000/api/v1/properties/10/images/9",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"1f-3V6EmbXleWKKmTy4uluNjgPUp6w\""
+              },
+              "Date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Sat, 28 Nov 2026 02:30:15 GMT"
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "keep-alive"
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "timeout=5"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/v1/properties/9": {
+      "delete": {
+        "summary": "http://localhost:3000/api/v1/properties/4",
+        "responses": {
+          "204": {
+            "description": "http://localhost:3000/api/v1/properties/4",
+            "headers": {
+              "X-Powered-By": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Express"
+              },
+              "ETag": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "W/\"2f-s+dIAdKEzzxMPjAHSKhgvYCtmRk\""
+              },
+              "Date": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "Sat, 28 Nov 2026 02:04:59 GMT"
+              },
+              "Connection": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "keep-alive"
+              },
+              "Keep-Alive": {
+                "schema": {
+                  "type": "string"
+                },
+                "example": "timeout=5"
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "BearerAuth": []
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "BearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
